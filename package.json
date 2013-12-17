@@ -1,0 +1,35 @@
+{
+    "name": "Authentication-api",
+    "version": "0.0.1",
+    "author": "vli",
+    "private": true,
+    "description": "An Authentication API.",
+    "main": "server.js",
+    "engines": {
+        "node": "0.10.x"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "http://github.com/vli/"
+    },
+    "peerDependencies": {
+    },
+    "devDependencies": {
+        "hapi": "1.x.x",
+        "lab": "0.2.x"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "hapi": "~1.2.0",
+        "mf-auth-api": "~0.0.1",
+        "request":"*",
+        "travelogue":"*",
+        "passport-local":"*",
+        "passport-google":"*",
+        "passport":"*",
+        "good":"*",
+        "handlebars": "1.0.x",
+        "hapi-swagger": "*",
+        "marked": "0.2.x"
+    }
+}
