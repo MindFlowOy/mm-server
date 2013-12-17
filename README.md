@@ -1,9 +1,9 @@
-# An AA API
+# MirrorMonkey server
 
-This web API was built to use some of the [hapi](hapijs.com) features and functionality together with passport authentication.
+This web server was built to use some of the [hapi](hapijs.com) features.
 
 
-Mapping parts:
+Mapping  auth module for dev time:
 
         In "auth"-directory
             npm link
