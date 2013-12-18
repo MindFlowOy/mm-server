@@ -22,6 +22,7 @@ apiHandler = (request) ->
             title: pack.name
             markdown: data
 
+
 module.exports = [
 
     method: 'GET'
@@ -29,7 +30,7 @@ module.exports = [
     config:
         auth: 'passport'
         handler: (request) ->
-            request.reply 'ACCESS GRANTED<br/><br/><a href="/aa/session">Logout</a>'
+            request.reply 'ACCESS GRANTED<br/><br/>'
 
 ,
     method: 'GET'
