@@ -56,13 +56,13 @@ clean:
 
 #------- Test  -------
 test: $(TEST_LIB) $(SRV_LIB)
-	NODE_ENV='production' node_modules/lab/bin/lab
+	node_modules/lab/bin/lab
 
 test-cov: $(TEST_LIB) $(SRV_LIB)
-	NODE_ENV='production' node node_modules/lab/bin/lab -r threshold -t 100
+	node node_modules/lab/bin/lab -r threshold -t 100
 
 test-cov-html: $(TEST_LIB) $(SRV_LIB)
-	NODE_ENV='production' node node_modules/lab/bin/lab -r html -o coverage.html
+	node node_modules/lab/bin/lab -r html -o coverage.html
 
 .PHONY: test test-cov test-cov-html
 

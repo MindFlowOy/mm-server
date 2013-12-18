@@ -16,6 +16,7 @@
 environmentType =
       DEVELOPMET: 'development'
       PRODUCTION: 'production'
+      TEST: 'test'
 
 module.exports =
     envType: environmentType

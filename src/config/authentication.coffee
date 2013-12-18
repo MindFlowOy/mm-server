@@ -43,4 +43,19 @@ conf[envType.PRODUCTION] =
             realm: serverConfigs[envType.PRODUCTION].url
             returnURL: serverConfigs[envType.PRODUCTION].url + 'auth/google/return'
 
+###
+* Authentication configuration for testing
+* @name development
+* @api public
+###
+conf[envType.TEST] =
+    authConfig =
+        urls:
+            successRedirect: null
+            failureRedirect: null
+
+        google:
+            realm: serverConfigs[envType.TEST].url
+            returnURL: serverConfigs[envType.TEST].url + 'auth/google/return'
+
 module.exports = conf

@@ -101,6 +101,50 @@ conf[envType.PRODUCTION] =
         travelogue: true
 
 
+###
+* Server test configuration
+* @name test
+* @api public
+###
+conf[envType.TEST] =
+
+    # Keep in sync
+    protocoll: 'http'
+    host: '127.0.0.1'
+    port: 3333
+    url : 'http://127.0.0.1:3333/'
+    # Keep in sync ends
+
+    options:
+        state:
+            cookies:
+                clearInvalid: true
+
+        timeout:
+            server: 50000
+
+        labels: [ 'api' ]
+        views:
+            path: 'templates'
+            engines:
+                html: 'handlebars'
+
+            partialsPath: __dirname.replace('/lib/config', '') + '/templates/withPartials'
+            helpersPath: __dirname.replace('/lib/config', '') + '/templates/helpers'
+            isCached: false
+
+        cors: true
+
+    excludePaths: [ '/docs/' ]
+    plugins:
+        # Two days long sessions
+        yar:
+            ttl: 2 * 24 * 60 * 60 * 1000
+            cookieOptions:
+                password: 'mindsecretflow'
+                isSecure: false
+
+        travelogue: true
 
 
 module.exports = conf
