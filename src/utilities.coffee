@@ -1,6 +1,17 @@
 "use strict"
+
+###
+* ---
+*   Utilities module
+*   @name utilities
+*   @api public
+###
+
 marked = require("marked")
 fs = require("fs")
+
+# Constants
+envType  = require('./config/constants').envType
 
 module.exports =
     ###
@@ -33,3 +44,16 @@ module.exports =
     ###
     generateID: ->
         ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).substr -4
+
+    ###
+    *  env variable
+    * @type {String}
+    ###
+    env: process.env.NODE_ENV or envType.DEVELOPMET
+
+    ###
+    *  Test is development environment
+    * @return {boolean}
+    ###
+    isDevelopment: ()->
+        process.env.NODE_ENV is envType.DEVELOPMET

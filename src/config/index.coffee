@@ -7,11 +7,11 @@
 * @api public
 ###
 
+env = require('../utilities').env
 serverConf = require('./server')
 authConf = require('./authentication')
-envType = require('./constants').envType
+
 
 module.exports =
-    envType: envType
-    server: serverConf
-    authentication: authConf
+    server: serverConf[env]
+    authentication: authConf[env]

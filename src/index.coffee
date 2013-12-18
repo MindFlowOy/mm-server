@@ -3,109 +3,62 @@
 ###
 * ---
 *   Server Main
-*   @name ndex
+*   @name index
 *   @api public
 ###
 
+# Package information
 pack = require '../package'
-Hapi = require 'hapi'
+# Utils module
 utils = require './utilities'
+# Config module
 configs  = require('./config')
+# Server module
+server  = require('./server')
+# Routes module
+routes  = require('./routes')
 
 
-###
-*  Environment variable
-* @type {string}
-###
-env = process.env.NODE_ENV or configs.envType.DEVELOPMET
+# New hapi server based on configs
+hapiServer = server(configs.server)
 
+if not hapiServer.server or hapiServer.error
+    throw (hapiServer.server || '[ error ] Index: Unexpected error!' );
 
-###
-*  Server configurations based on environment variable
-* @type {Object.<string, string|number>}
-###
-serverConfigs = configs.server[env]
-
-###
-*  Authentication configurations based on environment variable
-* @type {Object.<string, string|number>}
-###
-authConfigs = configs.authentication[env]
-
-console.log 'configs.authentication ', configs.authentication
-console.log 'authConfigs ', authConfigs
-
-# Insert session and passport etc 'default' plugins
-plugins =
-    yar:
-        ttl: 2 * 24 * 60 * 60 * 1000
-        cookieOptions:
-            password: 'mindsecretflow'
-            isSecure: false
-
-    travelogue: serverConfigs
-
-server = new Hapi.Server(serverConfigs.hostname, serverConfigs.port, serverConfigs.options)
-server.pack.allow(ext: true).require plugins, (err) ->
-    throw err  if err
+hapiServer = hapiServer.server
 
 # MindFlow Authetication plugin
-authConfigs.passport = server.plugins.travelogue.passport
-server.pack.allow(ext: true).require('mf-auth-api', authConfigs, (err) ->
-    if not err and err isnt null
-        console.log [ 'error' ], 'mf-auth-api\' load error: ' + err
+configs.authentication.passport = hapiServer.plugins.travelogue.passport
+hapiServer.pack.allow(ext: true).require('mf-auth-api', configs.authentication, (err) ->
+    if err
+        console.error '[ error ] Index: plugin mf-auth-api load error: ', err
     else
-        console.log [ 'start' ], 'mf-auth-api interface loaded'
+        console.log '[ start ] mf-auth-api plugin loaded'
 )
 
+
 # Stack trace for dev time
-if env is configs.envType.DEVELOPMET
-    server.on 'internalError', (event) ->
-        console.log 'INTERNAL ERROR'
-        console.log event
+if utils.isDevelopment
+    hapiServer.on 'internalError', (event) ->
+        console.error '[ error ] Index: Internal error!'
+        console.error event
 
 # Add server routes
-server.addRoute
-    method: 'GET'
-    path: '/home'
-    config:
-        auth: 'passport'
-        handler: (request) ->
-            request.reply 'ACCESS GRANTED<br/><br/><a href="/aa/session">Logout</a>'
-
-apiHandler = (request) ->
-    utils.getMarkDownHTML __dirname.replace('/lib', '') + '/README.md', (err, data) ->
-        request.reply.view 'swagger.html',
-            title: pack.name
-            markdown: data
-
-server.addRoute
-    method: 'GET'
-    path: '/'
-    config:
-        handler: apiHandler
-
-server.addRoute
-    method: 'GET'
-    path: '/api/{path*}'
-    handler:
-        directory:
-            path: './public'
-            listing: false
-            index: true
+hapiServer.addRoutes routes
 
 # Start server
-server.start ->
-    console.log 'server started ', server.info.uri
+hapiServer.start ->
+    console.log 'server started ', hapiServer.info.uri
 
 # Add Swagger plugin
 swaggerOptions =
-    basePath: configs.server.url(env)
+    basePath: configs.server.url
+    constth: configs.server.url
     apiVersion: pack.version
 
-server.pack.allow(ext: true).require('hapi-swagger', swaggerOptions, (err) ->
+hapiServer.pack.allow(ext: true).require('hapi-swagger', swaggerOptions, (err) ->
     if err
-        console.log '[ error ], plugin swagger load error: ', err
+        console.error '[ error ] Index: plugin swagger load error: ', err
     else
-        console.log '[ start ], swagger interface loaded!'
+        console.log '[ start ] swagger plugin loaded'
 )

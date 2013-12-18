@@ -9,19 +9,7 @@
 
 envType = require('./constants').envType
 
-conf =
-    ###
-    * Server url
-    * @method url
-    * @param {string} env - current environment: should be development | production | devtest
-    * @return {string} URL of the server
-    * @api public
-    ###
-    url: (env) ->
-        console.log "Getting url ", env
-        currentConf = @[env]
-        "#{ currentConf.protocoll }://#{ currentConf.host }:#{ currentConf.port }/"
-
+conf = {}
 
 ###
 * Server development configuration
@@ -29,9 +17,13 @@ conf =
 * @api public
 ###
 conf[envType.DEVELOPMET] =
+    # Keep in sync
     protocoll: 'http'
     host: 'localhost'
     port: 8000
+    url : 'http://localhost:8000/'
+    # Keep in sync ends
+
     options:
         state:
             cookies:
@@ -46,13 +38,22 @@ conf[envType.DEVELOPMET] =
             engines:
                 html: 'handlebars'
 
-            partialsPath: __dirname.replace('/bin', '') + '/../../templates/withPartials'
-            helpersPath: __dirname.replace('/bin', '') + '/../../templates/helpers'
+            partialsPath: __dirname.replace('/src/config', '') + '/templates/withPartials'
+            helpersPath: __dirname.replace('/src/config', '') + '/templates/helpers'
             isCached: false
 
         cors: true
 
     excludePaths: [ '/docs/' ]
+    plugins:
+        # Two days long sessions
+        yar:
+            ttl: 2 * 24 * 60 * 60 * 1000
+            cookieOptions:
+                password: 'mindsecretflow'
+                isSecure: false
+
+        travelogue: true
 
 ###
 * Server production configuration
@@ -60,9 +61,14 @@ conf[envType.DEVELOPMET] =
 * @api public
 ###
 conf[envType.PRODUCTION] =
-    protocoll: 'https'
-    host: 'www.mirrormonkey.com'
+
+    # Keep in sync
+    protocoll: 'http'
+    host: '127.0.0.1'
     port: 3000
+    url : 'http://127.0.0.1:3000/'
+    # Keep in sync ends
+
     options:
         state:
             cookies:
@@ -77,13 +83,23 @@ conf[envType.PRODUCTION] =
             engines:
                 html: 'handlebars'
 
-            partialsPath: __dirname.replace('/bin', '') + '/../templates/withPartials'
-            helpersPath: __dirname.replace('/bin', '') + '/../templates/helpers'
+            partialsPath: __dirname.replace('/lib/config', '') + '/templates/withPartials'
+            helpersPath: __dirname.replace('/lib/config', '') + '/templates/helpers'
             isCached: false
 
         cors: true
 
     excludePaths: [ '/docs/' ]
+    plugins:
+        # Two days long sessions
+        yar:
+            ttl: 2 * 24 * 60 * 60 * 1000
+            cookieOptions:
+                password: 'mindsecretflow'
+                isSecure: false
+
+        travelogue: true
+
 
 
 

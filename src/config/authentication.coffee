@@ -24,8 +24,8 @@ conf[envType.DEVELOPMET] =
             failureRedirect: null
 
         google:
-            realm: serverConfigs.url(envType.DEVELOPMET)
-            returnURL: serverConfigs.url(envType.DEVELOPMET) + 'auth/google/return'
+            realm: serverConfigs[envType.DEVELOPMET].url
+            returnURL: serverConfigs[envType.DEVELOPMET].url + 'auth/google/return'
 
 
 ###
@@ -40,7 +40,7 @@ conf[envType.PRODUCTION] =
             failureRedirect: null
 
         google:
-            realm: serverConfigs.url(envType.PRODUCTION)
-            returnURL: serverConfigs.url(envType.PRODUCTION) + 'auth/google/return'
+            realm: serverConfigs[envType.PRODUCTION].url
+            returnURL: serverConfigs[envType.PRODUCTION].url + 'auth/google/return'
 
 module.exports = conf
