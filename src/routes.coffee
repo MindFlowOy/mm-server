@@ -2,9 +2,9 @@
 
 ###
 * ---
-* Routes module
-* @name routes
-* @api public
+*   Routes module
+*   @name routes
+*   @api public
 ###
 
 # Package information
@@ -15,9 +15,8 @@ utils = require('./utilities')
 Types = require('hapi').types
 
 
-
 apiHandler = (request) ->
-    utils.getMarkDownHTML __dirname.replace('/lib', '') + '/README.md', (err, data) ->
+    utils.getMarkDownHTML __dirname + '/../API.md', (err, data) ->
         request.reply.view 'swagger.html',
             title: pack.name
             markdown: data
@@ -25,6 +24,7 @@ apiHandler = (request) ->
 
 module.exports = [
 
+    # Example of route requiring authentication
     method: 'GET'
     path: '/home'
     config:
@@ -33,12 +33,14 @@ module.exports = [
             request.reply 'ACCESS GRANTED<br/><br/>'
 
 ,
+    # API documentation root
     method: 'GET'
     path: '/'
     config:
         handler: apiHandler
 
 ,
+    # API documentation resources
     method: 'GET'
     path: '/api/{path*}'
     handler:

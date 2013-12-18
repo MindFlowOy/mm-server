@@ -1,7 +1,4 @@
-# MirrorMonkey server
-
-This web server was built to use some of the [hapi](hapijs.com) features.
-
+# MirrorMonkey development environment
 
 **Mapping  auth module for dev time:**
 
