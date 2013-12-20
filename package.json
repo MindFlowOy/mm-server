@@ -25,10 +25,11 @@
     "license": "MIT",
     "dependencies": {
         "coffee-script": "~1.6.3",
+        "lodash": "*",
         "hapi": "~1.2.0",
         "mf-auth-api": "~0.0.1",
-        "request":"*",
         "travelogue-fork":"*",
+        "request":"*",
         "passport-local":"*",
         "passport-google":"*",
         "passport":"*",

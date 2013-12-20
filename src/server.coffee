@@ -8,32 +8,27 @@
 ###
 
 Hapi = require 'hapi'
+
 exports = module.exports = (config) ->
 
-    retVal =
-        server: undefined
-        error: undefined
 
-    if config.host and config.port and config.options and config.plugins
+    validConf = config?.host? and config.port? and config.options? and config.plugins?
 
-        # New hapi server based on configs
-        serverInst = new Hapi.Server(config.host, config.port, config.options)
+    Hapi.utils.assert validConf, "Server module: Invalid configuration object: #{config}"
 
-        # Insert session and passport etc 'default' hapi pluginConfigs
-        pluginConfigs = config.plugins
+    # New hapi server based on configs
+    serverInst = new Hapi.Server(config.host, config.port, config.options)
 
-        # Travelogue uses same infromation that already exist in config
-        if pluginConfigs['travelogue-fork']
-            pluginConfigs['travelogue-fork'] = config
+    # Insert session and passport etc 'default' hapi pluginConfigs
+    pluginConfigs = config.plugins
 
-        serverInst.pack.allow(ext: true).require pluginConfigs, (err) ->
-            if err
-                retVal.error = (err or "Server module: Unexpected error! (hapi.pluginConfigs)")
-            else
-                retVal.server = serverInst
+    # Travelogue uses same infromation that already exist in config
+    if pluginConfigs['travelogue-fork']
+        pluginConfigs['travelogue-fork'] = config
 
-    else
-        retVal.error = "Server module: Invalid configuration object"
+    serverInst.pack.allow(ext: true).require pluginConfigs, (err) ->
+        Hapi.utils.assert not err, "Server module: #{err}"
+
+    serverInst
 
 
-    retVal

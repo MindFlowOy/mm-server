@@ -22,6 +22,11 @@
 
 **Building, testing etc...**
 
+        Notifications for tests (optional?)
+            First test if you have 'watch'-command in your shell, if not then install it from https://github.com/visionmedia/watch
+            Then test if you have 'terminal-notifier' installed and if not then run
+            >brew install terminal-notifier
+
         make run-dev
 
         make run-prod

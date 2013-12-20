@@ -11,20 +11,11 @@ Hapi = require 'hapi'
 
 exports = module.exports = (hapiServer, config) ->
 
-    retVal = undefined
+    Hapi.utils.assert hapiServer?.plugins?['travelogue-fork']?.passport?, 'Athentication module: Passport plugin not found'
+    Hapi.utils.assert config?, "Athentication module: Invalid configuration object #{config}"
 
-    if config and hapiServer?.plugins?['travelogue-fork']?.passport
+    config.passport = hapiServer.plugins['travelogue-fork'].passport
 
-        config.passport = hapiServer.plugins['travelogue-fork'].passport
-
-        hapiServer.pack.allow(ext: true).require('mf-auth-api', config, (err) ->
-            if err
-                retVal =  '[ error ] Athentication: plugin mf-auth-api load error: ' + err
-            else
-                console.log '[ start ] mf-auth-api plugin loaded'
-        )
-
-    else
-        retVal = '[ error ]  Athentication: Invalid configuration object'
-
-    retVal
+    hapiServer.pack.allow(ext: true).require 'mf-auth-api', config, (err) ->
+        Hapi.utils.assert not err, "Athentication module: #{err}"
+        hapiServer.log ['init'], 'Athentication module: mf-auth-api plugin loaded'

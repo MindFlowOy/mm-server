@@ -38,15 +38,9 @@ module.exports =
             callback err, data
 
 
-    ###
-    * Helper to generate ID
-    * @return {string} ID as a string
-    ###
-    generateID: ->
-        ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).substr -4
 
     ###
-    *  env variable
+    *  env variable that defaults to 'development'
     * @type {String}
     ###
     env: process.env.NODE_ENV or envType.DEVELOPMET
@@ -55,5 +49,5 @@ module.exports =
     *  Test is development environment
     * @return {boolean}
     ###
-    isDevelopment: ()->
+    isDevelopment: ->
         process.env.NODE_ENV is envType.DEVELOPMET

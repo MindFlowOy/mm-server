@@ -14,6 +14,8 @@ SRV_LIB = $(patsubst ./src/%.coffee, ./lib/%.js, $(SRV_SRC))
 TEST_SRC=$(shell find ./test/src -name "*.coffee")
 TEST_LIB = $(patsubst ./test/src/%.coffee, ./test/lib/%.js, $(TEST_SRC))
 
+# Program to be opened when notification icon is clicked for example 'com.sublimetext.3'
+NOTIFIER = 'com.googlecode.iterm2'
 
 debug:
 	@echo $(SRV_SRC)
@@ -27,13 +29,14 @@ test/lib/%.js: test/src/%.coffee
 	@echo "Coffee $< -- $@"
 	@coffee -c -o $(@D) $<
 
-compile: $(SRV_LIB)
+compile: $(SRV_LIB) $(TEST_LIB)
 
 
 #------- Watch file changes -------
  watch:
 	#watch -i 500ms $(MAKE) compile
-	watch -q -i 500ms $(MAKE) compile
+	rm -f ./test/test.log
+	watch -q -i 2000ms $(MAKE) test
 .PHONY: watch
 
 
@@ -54,9 +57,19 @@ clean:
 
 .PHONY: clean
 
+#------- Test notifications by https://github.com/alloy/terminal-notifier ------
+test-notify:
+	@if grep 'failed' '$(LOGFILE)'; then tail -50 '$(LOGFILE)' | terminal-notifier -title '$(TITLE)' -group '$(LOGFILE)' -sound Basso  -sender $(NOTIFIER) -image 'test/img/passed.png'; fi
+	@if grep 'complete' '$(LOGFILE)'; then grep 'complete' '$(LOGFILE)' | terminal-notifier -title '$(TITLE)' -group '$(LOGFILE)' -sound Pop -sender $(NOTIFIER) --image 'test/img/passed.png'; fi
+.PHONY: test-notify
+
 #------- Test  -------
-test: $(TEST_LIB) $(SRV_LIB)
-	node_modules/lab/bin/lab
+test: test/test.log
+
+test/test.log: $(TEST_SRC) $(SRV_SRC)
+	@make compile
+	@node_modules/lab/bin/lab -r console 2>&1 | tee ./test/test.log
+	@make test-notify  TITLE=test LOGFILE='./test/test.log'
 
 test-cov: $(TEST_LIB) $(SRV_LIB)
 	node node_modules/lab/bin/lab -r threshold -t 100

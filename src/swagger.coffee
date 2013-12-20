@@ -7,29 +7,25 @@
 *   @api public
 ###
 
-# Package information
+Hapi = require 'hapi'
+
+# Package information form package.json
 pack = require '../package'
 
 exports = module.exports = (hapiServer, config) ->
 
     retVal = undefined
 
-    if config and hapiServer
+    Hapi.utils.assert hapiServer, 'Swagger module: invalid server'
+    Hapi.utils.assert config, 'Swagger module: Invalid configuration object'
 
-        swaggerOptions =
-            basePath: config.url
-            constth: config.url
-            apiVersion: pack.version
+    swaggerOptions =
+        basePath: config.url
+        constth: config.url
+        apiVersion: pack.version
 
-        hapiServer.pack.allow(ext: true).require('hapi-swagger', swaggerOptions, (err) ->
-            if err
-                retVal ='[ error ] Swagger: plugin swagger load error: ' + err
-            else
-                console.log '[ start ] swagger plugin loaded'
-        )
+    hapiServer.pack.allow(ext: true).require 'hapi-swagger', swaggerOptions, (err) ->
+        Hapi.utils.assert not err, "Swagger module: #{err}"
+        hapiServer.log [ 'init' ], 'Swagger module: hapi-swagger plugin loaded'
 
 
-    else
-        retVal = '[ error ] Swagger : Invalid configuration object'
-
-    retVal
