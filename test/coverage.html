@@ -1,0 +1,5114 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Coverage</title>
+    <script>
+      headings = [];
+
+      onload = function(){
+          headings = document.querySelectorAll('h2');
+      };
+
+      onscroll = function(e){
+          var heading = find(window.scrollY);
+          if (!heading) return;
+          var links = document.querySelectorAll('#menu a')
+                  , link;
+
+          for (var i = 0, len = links.length; i < len; ++i) {
+              link = links[i];
+              link.className = link.getAttribute('href') == '#' + heading.id ? 'active' : '';
+          }
+      };
+
+      function find(y) {
+          var i = headings.length
+                  , heading;
+
+          while (i--) {
+              heading = headings[i];
+              if (y >= heading.offsetTop) {
+                  return heading;
+              }
+          }
+      }
+    </script>
+    <style>
+    body {
+        font: 14px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: 0;
+        color: #2c2c2c;
+    }
+
+    #coverage {
+        padding: 60px;
+    }
+
+    h1 a:hover {
+        text-decoration: none;
+    }
+
+    h2 {
+        width: 80%;
+        margin-top: 80px;
+        margin-bottom: 0;
+        font-weight: 100;
+        letter-spacing: 1px;
+    }
+
+    ul {
+        margin-top: 20px;
+        padding: 0 15px;
+        width: 100%;
+    }
+
+    ul li {
+        float: left;
+        width: 40%;
+        margin-top: 5px;
+        margin-right: 60px;
+        list-style: none;
+        padding: 5px 0;
+        font-size: 12px;
+    }
+
+    #menu {
+        position: fixed;
+        font-size: 12px;
+        overflow-y: auto;
+        top: 0;
+        right: 0;
+        margin: 0;
+        height: 100%;
+        padding: 15px 15px;
+        border-left: 1px solid #eee;
+        background-color: #666;
+    }
+
+    #menu::after {
+        display: block;
+        content: '';
+        padding-top: 80px;
+    }
+
+    #menu li a {
+        display: block;
+        color: white;
+        padding: 0 5px 0 35px;
+        transition: background 300ms;
+        text-decoration: none;
+    }
+
+    #menu li {
+        position: relative;
+        list-style: none;
+    }
+
+    #menu a:hover,
+    #menu a.active {
+        text-decoration: none;
+        background: rgba(255,255,255,.4);
+    }
+
+    #menu li:hover .cov {
+        opacity: 1;
+    }
+
+    #menu li .dirname {
+        opacity: .60;
+        padding-right: 2px;
+    }
+
+    #menu li .basename {
+        opacity: 1;
+    }
+
+    #menu .cov {
+        background: rgba(0,0,0,.3);
+        position: absolute;
+        top: 0;
+        font-size: 9px;
+        text-align: center;
+        opacity: .8;
+        width: 22px;
+        border-radius: 10px;
+        padding: 2px 3px;
+    }
+
+    .stats:nth-child(2n) {
+        display: inline-block;
+        margin-top: 15px;
+        border: 1px solid #eee;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .stats div {
+        float: left;
+        padding: 0 5px;
+    }
+
+    .stats::after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+
+    .stats .sloc::after {
+        content: ' SLOC';
+        color: #b6b6b6;
+    }
+
+    .stats .percentage::after {
+        content: ' coverage';
+        color: #b6b6b6;
+    }
+
+    .stats .hits,
+    .stats .misses {
+        display: none;
+    }
+
+    .high {
+        color: #00d4b4;
+    }
+    .medium {
+        color: #e87d0d;
+    }
+    .low {
+        color: #d4081a;
+    }
+    .terrible {
+        color: #d4081a;
+        font-weight: bold;
+    }
+
+    table {
+        width: 80%;
+        margin-top: 10px;
+        border-collapse: collapse;
+        border: 1px solid #cbcbcb;
+        color: #363636;
+        border-radius: 3px;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table td.line,
+    table td.hits {
+        width: 20px;
+        background: #eaeaea;
+        text-align: center;
+        font-size: 11px;
+        padding: 0 10px;
+        color: #949494;
+    }
+
+    table td.hits {
+        width: 10px;
+        padding: 2px 5px;
+        color: rgba(0,0,0,.2);
+        background: #f0f0f0;
+    }
+
+    tr.miss td.line,
+    tr.miss td.hits {
+        background: #e6c3c7;
+    }
+
+    tr.miss td {
+        background: #f8d5d8;
+    }
+
+    td.source {
+        padding-left: 15px;
+        line-height: 15px;
+        white-space: pre;
+        font: 12px monaco, monospace;
+    }
+
+    td.source div {
+        display: inline-block;
+    }
+
+    td.source div.miss {
+        background: #f8d5d8;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="coverage">
+        <h1 id="overview">Code Coverage Report</h1>
+        <div id="menu">
+            <li><a href="#overview">overview</a></li>
+            
+            <li>
+                <span class="cov high">86.67</span>
+                <a href="#lib/authentication.js"><span class="dirname">lib/</span><span class="basename">authentication.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov medium">68.42</span>
+                <a href="#lib/routes.js"><span class="dirname">lib/</span><span class="basename">routes.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov high">88.89</span>
+                <a href="#lib/server.js"><span class="dirname">lib/</span><span class="basename">server.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov low">46.67</span>
+                <a href="#lib/utilities.js"><span class="dirname">lib/</span><span class="basename">utilities.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov high">100.00</span>
+                <a href="#lib/config/authentication.js"><span class="dirname">lib/config/</span><span class="basename">authentication.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov high">100.00</span>
+                <a href="#lib/config/constants.js"><span class="dirname">lib/config/</span><span class="basename">constants.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov high">100.00</span>
+                <a href="#lib/config/index.js"><span class="dirname">lib/config/</span><span class="basename">index.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov high">100.00</span>
+                <a href="#lib/config/server.js"><span class="dirname">lib/config/</span><span class="basename">server.js</span></a>
+            </li>
+            
+            <li>
+                <span class="cov terrible">20.00</span>
+                <a href="#templates/helpers/numberformat.js"><span class="dirname">templates/helpers/</span><span class="basename">numberformat.js</span></a>
+            </li>
+            
+        </div>
+        <div class="stats high">
+            <div class="percentage">78.64%</div>
+            <div class="sloc">103</div>
+            <div class="hits">81</div>
+            <div class="misses">22</div>
+        </div>
+        <div id="files">
+            
+            <div class="file">
+                <h2 id="lib/authentication.js">lib/authentication.js</h2>
+                <div class="stats high">
+                    <div class="percentage">86.67%</div>
+                    <div class="sloc">15</div>
+                    <div class="hits">13</div>
+                    <div class="misses">2</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   Authentication module</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @name authentication</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var Hapi, exports;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  Hapi = require(&#x27;hapi&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  exports = module.exports = function(hapiServer, config) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits">2</td>
+                            <td class="source">    var retVal, _ref, _ref1;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">2</td>
+                            <td class="source">    retVal = void 0;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits">2</td>
+                            <td class="source">    if (config &amp;&amp; (hapiServer != null ? (_ref = hapiServer.plugins) != null ? (_ref1 = _ref[&#x27;travelogue-fork&#x27;]) != null ? _ref1.passport : void 0 : void 0 : void 0)) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits">2</td>
+                            <td class="source">      config.passport = hapiServer.plugins[&#x27;travelogue-fork&#x27;].passport;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits">2</td>
+                            <td class="source">      hapiServer.pack.allow({</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits"></td>
+                            <td class="source">        ext: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits"></td>
+                            <td class="source">      }).require(&#x27;mf-auth-api&#x27;, config, function(err) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits">2</td>
+                            <td class="source">        if (err) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">24</td>
+                                <td class="hits">0</td>
+                                <td class="source">          return retVal = &#x27;[ error ] Athentication: plugin mf-auth-api load error: &#x27; + err;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits"></td>
+                            <td class="source">        } else {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits">2</td>
+                            <td class="source">          return console.log(&#x27;[ start ] mf-auth-api plugin loaded&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">27</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">28</td>
+                            <td class="hits"></td>
+                            <td class="source">      });</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">29</td>
+                            <td class="hits"></td>
+                            <td class="source">    } else {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">30</td>
+                                <td class="hits">0</td>
+                                <td class="source">      retVal = &#x27;[ error ]  Athentication: Invalid configuration object&#x27;;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">31</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">32</td>
+                            <td class="hits">2</td>
+                            <td class="source">    return retVal;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">33</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">34</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">35</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">36</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/routes.js">lib/routes.js</h2>
+                <div class="stats medium">
+                    <div class="percentage">68.42%</div>
+                    <div class="sloc">19</div>
+                    <div class="hits">13</div>
+                    <div class="misses">6</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   Routes module</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @name routes</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var Hapi, Types, apiHandler, pack, renderJSON, utils;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  pack = require(&#x27;../package&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  utils = require(&#x27;./utilities&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">1</td>
+                            <td class="source">  Hapi = require(&#x27;hapi&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits">1</td>
+                            <td class="source">  Types = require(&#x27;hapi&#x27;).types;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits">1</td>
+                            <td class="source">  apiHandler = function(request) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">22</td>
+                                <td class="hits">0</td>
+                                <td class="source">    return utils.getMarkDownHTML(__dirname + &#x27;/../API.md&#x27;, function(err, data) {</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">23</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return request.reply.view(&#x27;swagger.html&#x27;, {</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits"></td>
+                            <td class="source">        title: pack.name,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits"></td>
+                            <td class="source">        markdown: data</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits"></td>
+                            <td class="source">      });</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">27</td>
+                            <td class="hits"></td>
+                            <td class="source">    });</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">28</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">29</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">30</td>
+                            <td class="hits">1</td>
+                            <td class="source">  renderJSON = function(request, error, result) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">31</td>
+                            <td class="hits">1</td>
+                            <td class="source">    if (error) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">32</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return request.reply(new Hapi.error(500, error));</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">33</td>
+                            <td class="hits"></td>
+                            <td class="source">    } else {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">34</td>
+                            <td class="hits">1</td>
+                            <td class="source">      return request.reply(result).type(&#x27;application/json; charset=utf-8&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">35</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">36</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">37</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">38</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = [</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">39</td>
+                            <td class="hits"></td>
+                            <td class="source">    {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">40</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">41</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &#x27;/home&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">42</td>
+                            <td class="hits"></td>
+                            <td class="source">      config: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">43</td>
+                            <td class="hits"></td>
+                            <td class="source">        auth: &#x27;passport&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">44</td>
+                            <td class="hits"></td>
+                            <td class="source">        handler: function(request) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">45</td>
+                                <td class="hits">0</td>
+                                <td class="source">          return request.reply(&#x27;ACCESS GRANTED&lt;br/&gt;&lt;br/&gt;&#x27;);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">46</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">47</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">48</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">49</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &quot;GET&quot;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">50</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &quot;/questions/&quot;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">51</td>
+                            <td class="hits"></td>
+                            <td class="source">      config: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">52</td>
+                            <td class="hits"></td>
+                            <td class="source">        auth: false,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">53</td>
+                            <td class="hits"></td>
+                            <td class="source">        handler: function(request) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">54</td>
+                            <td class="hits">1</td>
+                            <td class="source">          return renderJSON(request, null, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">55</td>
+                            <td class="hits"></td>
+                            <td class="source">            questions: [</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">56</td>
+                            <td class="hits"></td>
+                            <td class="source">              {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">57</td>
+                            <td class="hits"></td>
+                            <td class="source">                Q: &quot;Did you eat food?&quot;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">58</td>
+                            <td class="hits"></td>
+                            <td class="source">                Y: 1,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">59</td>
+                            <td class="hits"></td>
+                            <td class="source">                N: 0</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">60</td>
+                            <td class="hits"></td>
+                            <td class="source">              }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">61</td>
+                            <td class="hits"></td>
+                            <td class="source">                Q: &quot;Was it mostly plants?&quot;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">62</td>
+                            <td class="hits"></td>
+                            <td class="source">                Y: 1,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">63</td>
+                            <td class="hits"></td>
+                            <td class="source">                N: -1</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">64</td>
+                            <td class="hits"></td>
+                            <td class="source">              }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">65</td>
+                            <td class="hits"></td>
+                            <td class="source">                Q: &quot;Was it &#x27;not too much&#x27;?&quot;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">66</td>
+                            <td class="hits"></td>
+                            <td class="source">                Y: -1,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">67</td>
+                            <td class="hits"></td>
+                            <td class="source">                N: 1</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">68</td>
+                            <td class="hits"></td>
+                            <td class="source">              }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">69</td>
+                            <td class="hits"></td>
+                            <td class="source">            ]</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">70</td>
+                            <td class="hits"></td>
+                            <td class="source">          });</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">71</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">72</td>
+                            <td class="hits"></td>
+                            <td class="source">        description: &#x27;Get questions&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">73</td>
+                            <td class="hits"></td>
+                            <td class="source">        notes: &#x27;Lists questions&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">74</td>
+                            <td class="hits"></td>
+                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;questions&#x27;]</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">75</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">76</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">77</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">78</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &#x27;/users/&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">79</td>
+                            <td class="hits"></td>
+                            <td class="source">      config: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">80</td>
+                            <td class="hits"></td>
+                            <td class="source">        auth: &#x27;passport&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">81</td>
+                            <td class="hits"></td>
+                            <td class="source">        handler: function(request) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">82</td>
+                                <td class="hits">0</td>
+                                <td class="source">          console.log(&#x27;Route: /users/ #{request.user}&#x27;);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">83</td>
+                                <td class="hits">0</td>
+                                <td class="source">          return renderJSON(request, null, request.user);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">84</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">85</td>
+                            <td class="hits"></td>
+                            <td class="source">        description: &#x27;Get user&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">86</td>
+                            <td class="hits"></td>
+                            <td class="source">        notes: &#x27;Get user data&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">87</td>
+                            <td class="hits"></td>
+                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;user&#x27;]</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">88</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">89</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">90</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">91</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &#x27;/&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">92</td>
+                            <td class="hits"></td>
+                            <td class="source">      config: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">93</td>
+                            <td class="hits"></td>
+                            <td class="source">        handler: apiHandler</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">94</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">95</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">96</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">97</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &#x27;/api/{path*}&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">98</td>
+                            <td class="hits"></td>
+                            <td class="source">      handler: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">99</td>
+                            <td class="hits"></td>
+                            <td class="source">        directory: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">100</td>
+                            <td class="hits"></td>
+                            <td class="source">          path: &#x27;./public&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">101</td>
+                            <td class="hits"></td>
+                            <td class="source">          listing: false,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">102</td>
+                            <td class="hits"></td>
+                            <td class="source">          index: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">103</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">104</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">105</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">106</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">107</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &#x27;/test/{path*}&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">108</td>
+                            <td class="hits"></td>
+                            <td class="source">      handler: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">109</td>
+                            <td class="hits"></td>
+                            <td class="source">        directory: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">110</td>
+                            <td class="hits"></td>
+                            <td class="source">          path: &#x27;./test&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">111</td>
+                            <td class="hits"></td>
+                            <td class="source">          listing: false,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">112</td>
+                            <td class="hits"></td>
+                            <td class="source">          index: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">113</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">114</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">115</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">116</td>
+                            <td class="hits"></td>
+                            <td class="source">  ];</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">117</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">118</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">119</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/server.js">lib/server.js</h2>
+                <div class="stats high">
+                    <div class="percentage">88.89%</div>
+                    <div class="sloc">18</div>
+                    <div class="hits">16</div>
+                    <div class="misses">2</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   Server module</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @name server</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var Hapi, exports;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  Hapi = require(&#x27;hapi&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  exports = module.exports = function(config) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits">2</td>
+                            <td class="source">    var pluginConfigs, retVal, serverInst;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">2</td>
+                            <td class="source">    retVal = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source">      server: void 0,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits"></td>
+                            <td class="source">      error: void 0</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source">    };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits">2</td>
+                            <td class="source">    if (config.host &amp;&amp; config.port &amp;&amp; config.options &amp;&amp; config.plugins) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits">2</td>
+                            <td class="source">      serverInst = new Hapi.Server(config.host, config.port, config.options);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits">2</td>
+                            <td class="source">      pluginConfigs = config.plugins;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits">2</td>
+                            <td class="source">      if (pluginConfigs[&#x27;travelogue-fork&#x27;]) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits">2</td>
+                            <td class="source">        pluginConfigs[&#x27;travelogue-fork&#x27;] = config;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">27</td>
+                            <td class="hits">2</td>
+                            <td class="source">      serverInst.pack.allow({</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">28</td>
+                            <td class="hits"></td>
+                            <td class="source">        ext: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">29</td>
+                            <td class="hits"></td>
+                            <td class="source">      }).require(pluginConfigs, function(err) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">30</td>
+                            <td class="hits">2</td>
+                            <td class="source">        if (err) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">31</td>
+                                <td class="hits">0</td>
+                                <td class="source">          return retVal.error = err || &quot;Server module: Unexpected error! (hapi.pluginConfigs)&quot;;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">32</td>
+                            <td class="hits"></td>
+                            <td class="source">        } else {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">33</td>
+                            <td class="hits">2</td>
+                            <td class="source">          return retVal.server = serverInst;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">34</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">35</td>
+                            <td class="hits"></td>
+                            <td class="source">      });</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">36</td>
+                            <td class="hits"></td>
+                            <td class="source">    } else {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">37</td>
+                                <td class="hits">0</td>
+                                <td class="source">      retVal.error = &quot;Server module: Invalid configuration object&quot;;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">38</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">39</td>
+                            <td class="hits">2</td>
+                            <td class="source">    return retVal;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">40</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">41</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">42</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">43</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/utilities.js">lib/utilities.js</h2>
+                <div class="stats low">
+                    <div class="percentage">46.67%</div>
+                    <div class="sloc">15</div>
+                    <div class="hits">7</div>
+                    <div class="misses">8</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   Utilities module</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @name utilities</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  *   @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var envType, fs, marked;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  marked = require(&quot;marked&quot;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  fs = require(&quot;fs&quot;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">1</td>
+                            <td class="source">  envType = require(&#x27;./config/constants&#x27;).envType;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source">    /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits"></td>
+                            <td class="source">    * Helper to get Markdown file as HTML</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits"></td>
+                            <td class="source">    * @param {string} path - markup file path</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits"></td>
+                            <td class="source">    * @param {function(err,string)} callback - Callback method</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits"></td>
+                            <td class="source">    */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits"></td>
+                            <td class="source">    getMarkDownHTML: function(path, callback) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">27</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return fs.readFile(path, &quot;utf8&quot;, function(err, data) {</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">28</td>
+                                <td class="hits">0</td>
+                                <td class="source">        if (!err) {</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">29</td>
+                                <td class="hits">0</td>
+                                <td class="source">          marked.setOptions({</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">30</td>
+                            <td class="hits"></td>
+                            <td class="source">            gfm: true,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">31</td>
+                            <td class="hits"></td>
+                            <td class="source">            tables: true,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">32</td>
+                            <td class="hits"></td>
+                            <td class="source">            breaks: false,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">33</td>
+                            <td class="hits"></td>
+                            <td class="source">            pedantic: false,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">34</td>
+                            <td class="hits"></td>
+                            <td class="source">            sanitize: true,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">35</td>
+                            <td class="hits"></td>
+                            <td class="source">            smartLists: true,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">36</td>
+                            <td class="hits"></td>
+                            <td class="source">            smartypants: false,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">37</td>
+                            <td class="hits"></td>
+                            <td class="source">            langPrefix: &quot;language-&quot;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">38</td>
+                            <td class="hits"></td>
+                            <td class="source">            highlight: function(code, lang) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">39</td>
+                                <td class="hits">0</td>
+                                <td class="source">              return code;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">40</td>
+                            <td class="hits"></td>
+                            <td class="source">            }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">41</td>
+                            <td class="hits"></td>
+                            <td class="source">          });</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">42</td>
+                                <td class="hits">0</td>
+                                <td class="source">          data = marked(data);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">43</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">44</td>
+                                <td class="hits">0</td>
+                                <td class="source">        return callback(err, data);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">45</td>
+                            <td class="hits"></td>
+                            <td class="source">      });</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">46</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">47</td>
+                            <td class="hits"></td>
+                            <td class="source">    /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">48</td>
+                            <td class="hits"></td>
+                            <td class="source">    * Helper to generate ID</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">49</td>
+                            <td class="hits"></td>
+                            <td class="source">    * @return {string} ID as a string</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">50</td>
+                            <td class="hits"></td>
+                            <td class="source">    */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">51</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">52</td>
+                            <td class="hits"></td>
+                            <td class="source">    generateID: function() {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">53</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return (&quot;0000&quot; + (Math.random() * Math.pow(36, 4) &lt;&lt; 0).toString(36)).substr(-4);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">54</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">55</td>
+                            <td class="hits"></td>
+                            <td class="source">    /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">56</td>
+                            <td class="hits"></td>
+                            <td class="source">    *  env variable</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">57</td>
+                            <td class="hits"></td>
+                            <td class="source">    * @type {String}</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">58</td>
+                            <td class="hits"></td>
+                            <td class="source">    */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">59</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">60</td>
+                            <td class="hits"></td>
+                            <td class="source">    env: process.env.NODE_ENV || envType.DEVELOPMET,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">61</td>
+                            <td class="hits"></td>
+                            <td class="source">    /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">62</td>
+                            <td class="hits"></td>
+                            <td class="source">    *  Test is development environment</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">63</td>
+                            <td class="hits"></td>
+                            <td class="source">    * @return {boolean}</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">64</td>
+                            <td class="hits"></td>
+                            <td class="source">    */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">65</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">66</td>
+                            <td class="hits"></td>
+                            <td class="source">    isDevelopment: function() {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">67</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return process.env.NODE_ENV === envType.DEVELOPMET;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">68</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">69</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">70</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">71</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">72</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/config/authentication.js">lib/config/authentication.js</h2>
+                <div class="stats high">
+                    <div class="percentage">100.00%</div>
+                    <div class="sloc">10</div>
+                    <div class="hits">10</div>
+                    <div class="misses">0</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name config/suthentication</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var authConfig, conf, envType, serverConfigs;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  envType = require(&#x27;./constants&#x27;).envType;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  serverConfigs = require(&#x27;./server&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf = {};</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Authentication configuration for development</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name development</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.DEVELOPMET] = authConfig = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">27</td>
+                            <td class="hits"></td>
+                            <td class="source">    urls: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">28</td>
+                            <td class="hits"></td>
+                            <td class="source">      successRedirect: null,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">29</td>
+                            <td class="hits"></td>
+                            <td class="source">      failureRedirect: null</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">30</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">31</td>
+                            <td class="hits"></td>
+                            <td class="source">    google: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">32</td>
+                            <td class="hits"></td>
+                            <td class="source">      realm: serverConfigs[envType.DEVELOPMET].url,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">33</td>
+                            <td class="hits"></td>
+                            <td class="source">      returnURL: serverConfigs[envType.DEVELOPMET].url + &#x27;auth/google/return&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">34</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">35</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">36</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">37</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">38</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Authentication configuration for production</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">39</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name development</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">40</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">41</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">42</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">43</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">44</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.PRODUCTION] = authConfig = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">45</td>
+                            <td class="hits"></td>
+                            <td class="source">    urls: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">46</td>
+                            <td class="hits"></td>
+                            <td class="source">      successRedirect: null,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">47</td>
+                            <td class="hits"></td>
+                            <td class="source">      failureRedirect: null</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">48</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">49</td>
+                            <td class="hits"></td>
+                            <td class="source">    google: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">50</td>
+                            <td class="hits"></td>
+                            <td class="source">      realm: serverConfigs[envType.PRODUCTION].url,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">51</td>
+                            <td class="hits"></td>
+                            <td class="source">      returnURL: serverConfigs[envType.PRODUCTION].url + &#x27;auth/google/return&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">52</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">53</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">54</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">55</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">56</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Authentication configuration for testing</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">57</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name development</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">58</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">59</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">60</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">61</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">62</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.TEST] = authConfig = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">63</td>
+                            <td class="hits"></td>
+                            <td class="source">    urls: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">64</td>
+                            <td class="hits"></td>
+                            <td class="source">      successRedirect: null,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">65</td>
+                            <td class="hits"></td>
+                            <td class="source">      failureRedirect: null</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">66</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">67</td>
+                            <td class="hits"></td>
+                            <td class="source">    google: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">68</td>
+                            <td class="hits"></td>
+                            <td class="source">      realm: serverConfigs[envType.TEST].url,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">69</td>
+                            <td class="hits"></td>
+                            <td class="source">      returnURL: serverConfigs[envType.TEST].url + &#x27;auth/google/return&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">70</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">71</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">72</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">73</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = conf;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">74</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">75</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">76</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/config/constants.js">lib/config/constants.js</h2>
+                <div class="stats high">
+                    <div class="percentage">100.00%</div>
+                    <div class="sloc">5</div>
+                    <div class="hits">5</div>
+                    <div class="misses">0</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name config/constants</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source">  *  Environment types</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @enum {string}</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @type {string}</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var environmentType;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits">1</td>
+                            <td class="source">  environmentType = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source">    DEVELOPMET: &#x27;development&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits"></td>
+                            <td class="source">    PRODUCTION: &#x27;production&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits"></td>
+                            <td class="source">    TEST: &#x27;test&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits"></td>
+                            <td class="source">    envType: environmentType</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">27</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">28</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">29</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">30</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/config/index.js">lib/config/index.js</h2>
+                <div class="stats high">
+                    <div class="percentage">100.00%</div>
+                    <div class="sloc">7</div>
+                    <div class="hits">7</div>
+                    <div class="misses">0</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name config/index</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var authConf, env, serverConf;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  env = require(&#x27;../utilities&#x27;).env;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  serverConf = require(&#x27;./server&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits">1</td>
+                            <td class="source">  authConf = require(&#x27;./authentication&#x27;);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source">    server: serverConf[env],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits"></td>
+                            <td class="source">    authentication: authConf[env]</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="lib/config/server.js">lib/config/server.js</h2>
+                <div class="stats high">
+                    <div class="percentage">100.00%</div>
+                    <div class="sloc">9</div>
+                    <div class="hits">9</div>
+                    <div class="misses">0</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Generated by CoffeeScript 1.6.3</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits">1</td>
+                            <td class="source">(function() {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits">1</td>
+                            <td class="source">  &quot;use strict&quot;;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">5</td>
+                            <td class="hits"></td>
+                            <td class="source">  * ---</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">6</td>
+                            <td class="hits"></td>
+                            <td class="source">  *</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">7</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name config/server</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">9</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits">1</td>
+                            <td class="source">  var conf, envType;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">13</td>
+                            <td class="hits">1</td>
+                            <td class="source">  envType = require(&#x27;./constants&#x27;).envType;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">14</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">15</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf = {};</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">16</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">17</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">18</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Server development configuration</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">19</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name development</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">20</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">21</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">22</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">23</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">24</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.DEVELOPMET] = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">25</td>
+                            <td class="hits"></td>
+                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">26</td>
+                            <td class="hits"></td>
+                            <td class="source">    host: &#x27;localhost&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">27</td>
+                            <td class="hits"></td>
+                            <td class="source">    port: 8000,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">28</td>
+                            <td class="hits"></td>
+                            <td class="source">    url: &#x27;http://localhost:8000/&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">29</td>
+                            <td class="hits"></td>
+                            <td class="source">    options: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">30</td>
+                            <td class="hits"></td>
+                            <td class="source">      state: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">31</td>
+                            <td class="hits"></td>
+                            <td class="source">        cookies: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">32</td>
+                            <td class="hits"></td>
+                            <td class="source">          clearInvalid: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">33</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">34</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">35</td>
+                            <td class="hits"></td>
+                            <td class="source">      timeout: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">36</td>
+                            <td class="hits"></td>
+                            <td class="source">        server: 50000</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">37</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">38</td>
+                            <td class="hits"></td>
+                            <td class="source">      labels: [&#x27;api&#x27;],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">39</td>
+                            <td class="hits"></td>
+                            <td class="source">      views: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">40</td>
+                            <td class="hits"></td>
+                            <td class="source">        path: &#x27;templates&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">41</td>
+                            <td class="hits"></td>
+                            <td class="source">        engines: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">42</td>
+                            <td class="hits"></td>
+                            <td class="source">          html: &#x27;handlebars&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">43</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">44</td>
+                            <td class="hits"></td>
+                            <td class="source">        partialsPath: __dirname.replace(&#x27;/src/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">45</td>
+                            <td class="hits"></td>
+                            <td class="source">        helpersPath: __dirname.replace(&#x27;/src/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">46</td>
+                            <td class="hits"></td>
+                            <td class="source">        isCached: false</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">47</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">48</td>
+                            <td class="hits"></td>
+                            <td class="source">      cors: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">49</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">50</td>
+                            <td class="hits"></td>
+                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">51</td>
+                            <td class="hits"></td>
+                            <td class="source">    plugins: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">52</td>
+                            <td class="hits"></td>
+                            <td class="source">      yar: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">53</td>
+                            <td class="hits"></td>
+                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">54</td>
+                            <td class="hits"></td>
+                            <td class="source">        cookieOptions: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">55</td>
+                            <td class="hits"></td>
+                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">56</td>
+                            <td class="hits"></td>
+                            <td class="source">          isSecure: false</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">57</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">58</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">59</td>
+                            <td class="hits"></td>
+                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">60</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">61</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">62</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">63</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">64</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Server production configuration</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">65</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name production</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">66</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">67</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">68</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">69</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">70</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.PRODUCTION] = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">71</td>
+                            <td class="hits"></td>
+                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">72</td>
+                            <td class="hits"></td>
+                            <td class="source">    host: &#x27;127.0.0.1&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">73</td>
+                            <td class="hits"></td>
+                            <td class="source">    port: 3000,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">74</td>
+                            <td class="hits"></td>
+                            <td class="source">    url: &#x27;http://127.0.0.1:3000/&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">75</td>
+                            <td class="hits"></td>
+                            <td class="source">    options: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">76</td>
+                            <td class="hits"></td>
+                            <td class="source">      state: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">77</td>
+                            <td class="hits"></td>
+                            <td class="source">        cookies: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">78</td>
+                            <td class="hits"></td>
+                            <td class="source">          clearInvalid: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">79</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">80</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">81</td>
+                            <td class="hits"></td>
+                            <td class="source">      timeout: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">82</td>
+                            <td class="hits"></td>
+                            <td class="source">        server: 50000</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">83</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">84</td>
+                            <td class="hits"></td>
+                            <td class="source">      labels: [&#x27;api&#x27;],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">85</td>
+                            <td class="hits"></td>
+                            <td class="source">      views: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">86</td>
+                            <td class="hits"></td>
+                            <td class="source">        path: &#x27;templates&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">87</td>
+                            <td class="hits"></td>
+                            <td class="source">        engines: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">88</td>
+                            <td class="hits"></td>
+                            <td class="source">          html: &#x27;handlebars&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">89</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">90</td>
+                            <td class="hits"></td>
+                            <td class="source">        partialsPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">91</td>
+                            <td class="hits"></td>
+                            <td class="source">        helpersPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">92</td>
+                            <td class="hits"></td>
+                            <td class="source">        isCached: false</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">93</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">94</td>
+                            <td class="hits"></td>
+                            <td class="source">      cors: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">95</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">96</td>
+                            <td class="hits"></td>
+                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">97</td>
+                            <td class="hits"></td>
+                            <td class="source">    plugins: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">98</td>
+                            <td class="hits"></td>
+                            <td class="source">      yar: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">99</td>
+                            <td class="hits"></td>
+                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">100</td>
+                            <td class="hits"></td>
+                            <td class="source">        cookieOptions: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">101</td>
+                            <td class="hits"></td>
+                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">102</td>
+                            <td class="hits"></td>
+                            <td class="source">          isSecure: false</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">103</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">104</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">105</td>
+                            <td class="hits"></td>
+                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">106</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">107</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">108</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">109</td>
+                            <td class="hits"></td>
+                            <td class="source">  /*</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">110</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Server test configuration</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">111</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @name test</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">112</td>
+                            <td class="hits"></td>
+                            <td class="source">  * @api public</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">113</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">114</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">115</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">116</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.TEST] = {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">117</td>
+                            <td class="hits"></td>
+                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">118</td>
+                            <td class="hits"></td>
+                            <td class="source">    host: &#x27;127.0.0.1&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">119</td>
+                            <td class="hits"></td>
+                            <td class="source">    port: 3333,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">120</td>
+                            <td class="hits"></td>
+                            <td class="source">    url: &#x27;http://127.0.0.1:3333/&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">121</td>
+                            <td class="hits"></td>
+                            <td class="source">    options: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">122</td>
+                            <td class="hits"></td>
+                            <td class="source">      state: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">123</td>
+                            <td class="hits"></td>
+                            <td class="source">        cookies: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">124</td>
+                            <td class="hits"></td>
+                            <td class="source">          clearInvalid: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">125</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">126</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">127</td>
+                            <td class="hits"></td>
+                            <td class="source">      timeout: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">128</td>
+                            <td class="hits"></td>
+                            <td class="source">        server: 50000</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">129</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">130</td>
+                            <td class="hits"></td>
+                            <td class="source">      labels: [&#x27;api&#x27;],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">131</td>
+                            <td class="hits"></td>
+                            <td class="source">      views: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">132</td>
+                            <td class="hits"></td>
+                            <td class="source">        path: &#x27;templates&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">133</td>
+                            <td class="hits"></td>
+                            <td class="source">        engines: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">134</td>
+                            <td class="hits"></td>
+                            <td class="source">          html: &#x27;handlebars&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">135</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">136</td>
+                            <td class="hits"></td>
+                            <td class="source">        partialsPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">137</td>
+                            <td class="hits"></td>
+                            <td class="source">        helpersPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">138</td>
+                            <td class="hits"></td>
+                            <td class="source">        isCached: false</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">139</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">140</td>
+                            <td class="hits"></td>
+                            <td class="source">      cors: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">141</td>
+                            <td class="hits"></td>
+                            <td class="source">    },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">142</td>
+                            <td class="hits"></td>
+                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">143</td>
+                            <td class="hits"></td>
+                            <td class="source">    plugins: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">144</td>
+                            <td class="hits"></td>
+                            <td class="source">      yar: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">145</td>
+                            <td class="hits"></td>
+                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">146</td>
+                            <td class="hits"></td>
+                            <td class="source">        cookieOptions: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">147</td>
+                            <td class="hits"></td>
+                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">148</td>
+                            <td class="hits"></td>
+                            <td class="source">          isSecure: false</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">149</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">150</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">151</td>
+                            <td class="hits"></td>
+                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">152</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">153</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">154</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">155</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = conf;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">156</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">157</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">158</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="file">
+                <h2 id="templates/helpers/numberformat.js">templates/helpers/numberformat.js</h2>
+                <div class="stats terrible">
+                    <div class="percentage">20.00%</div>
+                    <div class="sloc">5</div>
+                    <div class="hits">1</div>
+                    <div class="misses">4</div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Line</th>
+                            <th>Hits</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                    
+                        <tr class="hit">
+                            <td class="line">1</td>
+                            <td class="hits"></td>
+                            <td class="source">// Handlebars helper </td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">2</td>
+                            <td class="hits"></td>
+                            <td class="source">// takes a number 3456 and return 3,456</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">3</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">4</td>
+                            <td class="hits">1</td>
+                            <td class="source">module.exports = function(number) {</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">5</td>
+                                <td class="hits">0</td>
+                                <td class="source">    if(number){</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">6</td>
+                                <td class="hits">0</td>
+                                <td class="source">      number = number.toString();</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">7</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return number.replace(/\B(?=(\d{3})+(?!\d))/g, &quot;,&quot;);</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">8</td>
+                            <td class="hits"></td>
+                            <td class="source">    }else{</td>
+                        </tr>
+                    
+                
+                    
+                        
+                            <tr class="miss">
+                                <td class="line">9</td>
+                                <td class="hits">0</td>
+                                <td class="source">      return number;</td>
+                            </tr>
+                        
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">10</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">11</td>
+                            <td class="hits"></td>
+                            <td class="source">}</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">12</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+  </body>
+</html>

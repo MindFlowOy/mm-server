@@ -47,8 +47,8 @@
       hapiServer.addRoutes(routes);
       return hapiServer.inject("/questions/", function(res) {
         expect(res.statusCode).to.equal(200);
-        expect(res.result.questions[0]).to.equal('1:?');
-        expect(res.result.questions[1]).to.equal('2:?');
+        expect(res.result.questions[0].Q).to.equal('Did you eat food?');
+        expect(res.result.questions[1].Q).to.equal('Was it mostly plants?');
         return done();
       });
     });

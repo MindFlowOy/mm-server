@@ -22,11 +22,15 @@
 
 **Building, testing etc...**
 
-        make-dev
+        make run-dev
 
-        make-prod
+        make run-prod
 
-        make-test
+        make test
+
+        make test-cov-html
+
+            brove to http://localhost:8000/test/coverage.html
 
         make deploy
 
@@ -34,4 +38,4 @@
 
         make
 
-        for more commands
+        to see more commands

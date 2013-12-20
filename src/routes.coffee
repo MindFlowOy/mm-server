@@ -49,7 +49,19 @@ module.exports = [
         auth: false
         handler: (request) ->
             renderJSON request, null,
-                questions: ["1:?", "2:?"]
+                questions: [
+                    Q: "Did you eat food?"
+                    Y: 1
+                    N: 0
+                ,
+                    Q: "Was it mostly plants?"
+                    Y: 1
+                    N: -1
+                ,
+                    Q: "Was it 'not too much'?"
+                    Y: -1
+                    N: 1
+                ]
 
         description: 'Get questions'
         notes: 'Lists questions'
@@ -62,9 +74,8 @@ module.exports = [
     config:
         auth: 'passport'
         handler: (request) ->
-            renderJSON request, null,
-                user:
-                    name:'vli'
+            console.log 'Route: /users/ #{request.user}'
+            renderJSON request, null, request.user
 
         description: 'Get user'
         notes: 'Get user data'
@@ -87,5 +98,14 @@ module.exports = [
             listing: false
             index: true
 
+,
+    # test coverage
+    method: 'GET'
+    path: '/test/{path*}'
+    handler:
+        directory:
+            path: './test'
+            listing: false
+            index: true
 
 ]

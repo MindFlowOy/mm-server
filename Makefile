@@ -62,7 +62,7 @@ test-cov: $(TEST_LIB) $(SRV_LIB)
 	node node_modules/lab/bin/lab -r threshold -t 100
 
 test-cov-html: $(TEST_LIB) $(SRV_LIB)
-	node node_modules/lab/bin/lab -r html -o coverage.html
+	node node_modules/lab/bin/lab -r html -o test/coverage.html
 
 .PHONY: test test-cov test-cov-html
 
