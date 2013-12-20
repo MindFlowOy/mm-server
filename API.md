@@ -1,3 +1,3 @@
-# MirrorMonkey server API
+# MirrorMonkey API
 
 More to come soon...

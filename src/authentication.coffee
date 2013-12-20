@@ -13,9 +13,9 @@ exports = module.exports = (hapiServer, config) ->
 
     retVal = undefined
 
-    if config and hapiServer?.plugins?.travelogue?.passport
+    if config and hapiServer?.plugins?['travelogue-fork']?.passport
 
-        config.passport = hapiServer.plugins.travelogue.passport
+        config.passport = hapiServer.plugins['travelogue-fork'].passport
 
         hapiServer.pack.allow(ext: true).require('mf-auth-api', config, (err) ->
             if err

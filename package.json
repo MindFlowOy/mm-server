@@ -1,5 +1,5 @@
 {
-    "name": "Authentication-api",
+    "name": "MirrorMonkey-api",
     "version": "0.0.1",
     "author": "vli",
     "private": true,
@@ -28,7 +28,7 @@
         "hapi": "~1.2.0",
         "mf-auth-api": "~0.0.1",
         "request":"*",
-        "travelogue":"*",
+        "travelogue-fork":"*",
         "passport-local":"*",
         "passport-google":"*",
         "passport":"*",

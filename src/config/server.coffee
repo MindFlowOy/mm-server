@@ -53,7 +53,7 @@ conf[envType.DEVELOPMET] =
                 password: 'mindsecretflow'
                 isSecure: false
 
-        travelogue: true
+        'travelogue-fork': true
 
 ###
 * Server production configuration
@@ -98,7 +98,7 @@ conf[envType.PRODUCTION] =
                 password: 'mindsecretflow'
                 isSecure: false
 
-        travelogue: true
+        'travelogue-fork': true
 
 
 ###
@@ -144,7 +144,7 @@ conf[envType.TEST] =
                 password: 'mindsecretflow'
                 isSecure: false
 
-        travelogue: true
+        'travelogue-fork': true
 
 
 module.exports = conf

@@ -7,6 +7,8 @@
 
         In "server" dir
             npm link mf-auth-api
+            npm link travelogue-fork
+
 
 **Base node installation:**
 
