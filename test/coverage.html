@@ -250,7 +250,7 @@
             </li>
             
             <li>
-                <span class="cov high">78.95</span>
+                <span class="cov high">92.86</span>
                 <a href="#lib/routes.js"><span class="dirname">lib/</span><span class="basename">routes.js</span></a>
             </li>
             
@@ -260,7 +260,7 @@
             </li>
             
             <li>
-                <span class="cov high">92.86</span>
+                <span class="cov high">100.00</span>
                 <a href="#lib/utilities.js"><span class="dirname">lib/</span><span class="basename">utilities.js</span></a>
             </li>
             
@@ -291,10 +291,10 @@
             
         </div>
         <div class="stats high">
-            <div class="percentage">90.63%</div>
-            <div class="sloc">96</div>
-            <div class="hits">87</div>
-            <div class="misses">9</div>
+            <div class="percentage">94.51%</div>
+            <div class="sloc">91</div>
+            <div class="hits">86</div>
+            <div class="misses">5</div>
         </div>
         <div id="files">
             
@@ -439,7 +439,7 @@
                     
                         <tr class="hit">
                             <td class="line">16</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">    var _ref, _ref1;</td>
                         </tr>
                     
@@ -447,7 +447,7 @@
                     
                         <tr class="hit">
                             <td class="line">17</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">    Hapi.utils.assert((hapiServer != null ? (_ref = hapiServer.plugins) != null ? (_ref1 = _ref[&#x27;travelogue-fork&#x27;]) != null ? _ref1.passport : void 0 : void 0 : void 0) != null, &#x27;Athentication module: Passport plugin not found&#x27;);</td>
                         </tr>
                     
@@ -455,7 +455,7 @@
                     
                         <tr class="hit">
                             <td class="line">18</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">    Hapi.utils.assert(config != null, &quot;Athentication module: Invalid configuration object &quot; + config);</td>
                         </tr>
                     
@@ -463,7 +463,7 @@
                     
                         <tr class="hit">
                             <td class="line">19</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">    config.passport = hapiServer.plugins[&#x27;travelogue-fork&#x27;].passport;</td>
                         </tr>
                     
@@ -471,7 +471,7 @@
                     
                         <tr class="hit">
                             <td class="line">20</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">    return hapiServer.pack.allow({</td>
                         </tr>
                     
@@ -495,7 +495,7 @@
                     
                         <tr class="hit">
                             <td class="line">23</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">      Hapi.utils.assert(!err, &quot;Athentication module: &quot; + err);</td>
                         </tr>
                     
@@ -503,7 +503,7 @@
                     
                         <tr class="hit">
                             <td class="line">24</td>
-                            <td class="hits">3</td>
+                            <td class="hits">4</td>
                             <td class="source">      return hapiServer.log([&#x27;init&#x27;], &#x27;Athentication module: mf-auth-api plugin loaded&#x27;);</td>
                         </tr>
                     
@@ -555,10 +555,10 @@
             <div class="file">
                 <h2 id="lib/routes.js">lib/routes.js</h2>
                 <div class="stats high">
-                    <div class="percentage">78.95%</div>
-                    <div class="sloc">19</div>
-                    <div class="hits">15</div>
-                    <div class="misses">4</div>
+                    <div class="percentage">92.86%</div>
+                    <div class="sloc">14</div>
+                    <div class="hits">13</div>
+                    <div class="misses">1</div>
                 </div>
                 <table>
                     <thead>
@@ -654,7 +654,7 @@
                         <tr class="hit">
                             <td class="line">11</td>
                             <td class="hits">1</td>
-                            <td class="source">  var Hapi, Types, apiHandler, pack, renderJSON, utils;</td>
+                            <td class="source">  var Hapi, Types, apiHandler, pack, utils;</td>
                         </tr>
                     
                 
@@ -806,79 +806,13 @@
                         <tr class="hit">
                             <td class="line">30</td>
                             <td class="hits">1</td>
-                            <td class="source">  renderJSON = function(request, error, result) {</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">31</td>
-                            <td class="hits">1</td>
-                            <td class="source">    if (error) {</td>
-                        </tr>
-                    
-                
-                    
-                        
-                            <tr class="miss">
-                                <td class="line">32</td>
-                                <td class="hits">0</td>
-                                <td class="source">      return request.reply(new Hapi.error(500, error));</td>
-                            </tr>
-                        
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">33</td>
-                            <td class="hits"></td>
-                            <td class="source">    } else {</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">34</td>
-                            <td class="hits">1</td>
-                            <td class="source">      return request.reply(result).type(&#x27;application/json; charset=utf-8&#x27;);</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">35</td>
-                            <td class="hits"></td>
-                            <td class="source">    }</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">36</td>
-                            <td class="hits"></td>
-                            <td class="source">  };</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">37</td>
-                            <td class="hits"></td>
-                            <td class="source"></td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">38</td>
-                            <td class="hits">1</td>
                             <td class="source">  module.exports = [</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">39</td>
+                            <td class="line">31</td>
                             <td class="hits"></td>
                             <td class="source">    {</td>
                         </tr>
@@ -886,81 +820,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">40</td>
-                            <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">41</td>
-                            <td class="hits"></td>
-                            <td class="source">      path: &#x27;/home&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">42</td>
-                            <td class="hits"></td>
-                            <td class="source">      config: {</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">43</td>
-                            <td class="hits"></td>
-                            <td class="source">        auth: &#x27;passport&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">44</td>
-                            <td class="hits"></td>
-                            <td class="source">        handler: function(request) {</td>
-                        </tr>
-                    
-                
-                    
-                        
-                            <tr class="miss">
-                                <td class="line">45</td>
-                                <td class="hits">0</td>
-                                <td class="source">          return request.reply(&#x27;ACCESS GRANTED&lt;br/&gt;&lt;br/&gt;&#x27;);</td>
-                            </tr>
-                        
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">46</td>
-                            <td class="hits"></td>
-                            <td class="source">        }</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">47</td>
-                            <td class="hits"></td>
-                            <td class="source">      }</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">48</td>
-                            <td class="hits"></td>
-                            <td class="source">    }, {</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">49</td>
+                            <td class="line">32</td>
                             <td class="hits"></td>
                             <td class="source">      method: &quot;GET&quot;,</td>
                         </tr>
@@ -968,7 +828,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">50</td>
+                            <td class="line">33</td>
                             <td class="hits"></td>
                             <td class="source">      path: &quot;/questions/&quot;,</td>
                         </tr>
@@ -976,7 +836,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">51</td>
+                            <td class="line">34</td>
                             <td class="hits"></td>
                             <td class="source">      config: {</td>
                         </tr>
@@ -984,7 +844,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">52</td>
+                            <td class="line">35</td>
                             <td class="hits"></td>
                             <td class="source">        auth: false,</td>
                         </tr>
@@ -992,7 +852,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">53</td>
+                            <td class="line">36</td>
                             <td class="hits"></td>
                             <td class="source">        handler: function(request) {</td>
                         </tr>
@@ -1000,15 +860,15 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">54</td>
+                            <td class="line">37</td>
                             <td class="hits">1</td>
-                            <td class="source">          return renderJSON(request, null, {</td>
+                            <td class="source">          return request.reply({</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">55</td>
+                            <td class="line">38</td>
                             <td class="hits"></td>
                             <td class="source">            questions: [</td>
                         </tr>
@@ -1016,7 +876,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">56</td>
+                            <td class="line">39</td>
                             <td class="hits"></td>
                             <td class="source">              {</td>
                         </tr>
@@ -1024,7 +884,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">57</td>
+                            <td class="line">40</td>
                             <td class="hits"></td>
                             <td class="source">                Q: &quot;Did you eat food?&quot;,</td>
                         </tr>
@@ -1032,7 +892,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">58</td>
+                            <td class="line">41</td>
                             <td class="hits"></td>
                             <td class="source">                Y: 1,</td>
                         </tr>
@@ -1040,7 +900,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">59</td>
+                            <td class="line">42</td>
                             <td class="hits"></td>
                             <td class="source">                N: 0</td>
                         </tr>
@@ -1048,7 +908,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">60</td>
+                            <td class="line">43</td>
                             <td class="hits"></td>
                             <td class="source">              }, {</td>
                         </tr>
@@ -1056,7 +916,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">61</td>
+                            <td class="line">44</td>
                             <td class="hits"></td>
                             <td class="source">                Q: &quot;Was it mostly plants?&quot;,</td>
                         </tr>
@@ -1064,7 +924,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">62</td>
+                            <td class="line">45</td>
                             <td class="hits"></td>
                             <td class="source">                Y: 1,</td>
                         </tr>
@@ -1072,7 +932,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">63</td>
+                            <td class="line">46</td>
                             <td class="hits"></td>
                             <td class="source">                N: -1</td>
                         </tr>
@@ -1080,7 +940,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">64</td>
+                            <td class="line">47</td>
                             <td class="hits"></td>
                             <td class="source">              }, {</td>
                         </tr>
@@ -1088,7 +948,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">65</td>
+                            <td class="line">48</td>
                             <td class="hits"></td>
                             <td class="source">                Q: &quot;Was it &#x27;not too much&#x27;?&quot;,</td>
                         </tr>
@@ -1096,7 +956,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">66</td>
+                            <td class="line">49</td>
                             <td class="hits"></td>
                             <td class="source">                Y: -1,</td>
                         </tr>
@@ -1104,7 +964,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">67</td>
+                            <td class="line">50</td>
                             <td class="hits"></td>
                             <td class="source">                N: 1</td>
                         </tr>
@@ -1112,7 +972,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">68</td>
+                            <td class="line">51</td>
                             <td class="hits"></td>
                             <td class="source">              }</td>
                         </tr>
@@ -1120,7 +980,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">69</td>
+                            <td class="line">52</td>
                             <td class="hits"></td>
                             <td class="source">            ]</td>
                         </tr>
@@ -1128,7 +988,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">70</td>
+                            <td class="line">53</td>
                             <td class="hits"></td>
                             <td class="source">          });</td>
                         </tr>
@@ -1136,7 +996,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">71</td>
+                            <td class="line">54</td>
                             <td class="hits"></td>
                             <td class="source">        },</td>
                         </tr>
@@ -1144,7 +1004,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">72</td>
+                            <td class="line">55</td>
                             <td class="hits"></td>
                             <td class="source">        description: &#x27;Get questions&#x27;,</td>
                         </tr>
@@ -1152,7 +1012,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">73</td>
+                            <td class="line">56</td>
                             <td class="hits"></td>
                             <td class="source">        notes: &#x27;Lists questions&#x27;,</td>
                         </tr>
@@ -1160,7 +1020,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">74</td>
+                            <td class="line">57</td>
                             <td class="hits"></td>
                             <td class="source">        tags: [&#x27;api&#x27;, &#x27;questions&#x27;]</td>
                         </tr>
@@ -1168,7 +1028,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">75</td>
+                            <td class="line">58</td>
                             <td class="hits"></td>
                             <td class="source">      }</td>
                         </tr>
@@ -1176,7 +1036,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">76</td>
+                            <td class="line">59</td>
                             <td class="hits"></td>
                             <td class="source">    }, {</td>
                         </tr>
@@ -1184,23 +1044,23 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">77</td>
+                            <td class="line">60</td>
                             <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                            <td class="source">      method: &quot;POST&quot;,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">78</td>
+                            <td class="line">61</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/users/&#x27;,</td>
+                            <td class="source">      path: &quot;/questions/&quot;,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">79</td>
+                            <td class="line">62</td>
                             <td class="hits"></td>
                             <td class="source">      config: {</td>
                         </tr>
@@ -1208,15 +1068,71 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">80</td>
+                            <td class="line">63</td>
                             <td class="hits"></td>
-                            <td class="source">        auth: &#x27;passport&#x27;,</td>
+                            <td class="source">        auth: true,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">81</td>
+                            <td class="line">64</td>
+                            <td class="hits"></td>
+                            <td class="source">        validate: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">65</td>
+                            <td class="hits"></td>
+                            <td class="source">          query: {},</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">66</td>
+                            <td class="hits"></td>
+                            <td class="source">          payload: {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">67</td>
+                            <td class="hits"></td>
+                            <td class="source">            username: Hapi.types.String().required().description(&#x27;username&#x27;),</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">68</td>
+                            <td class="hits"></td>
+                            <td class="source">            password: Hapi.types.String().required().description(&#x27;password&#x27;)</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">69</td>
+                            <td class="hits"></td>
+                            <td class="source">          }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">70</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">71</td>
                             <td class="hits"></td>
                             <td class="source">        handler: function(request) {</td>
                         </tr>
@@ -1225,26 +1141,16 @@
                     
                         
                             <tr class="miss">
-                                <td class="line">82</td>
+                                <td class="line">72</td>
                                 <td class="hits">0</td>
-                                <td class="source">          console.log(&#x27;Route: /users/ #{request.user}&#x27;);</td>
-                            </tr>
-                        
-                    
-                
-                    
-                        
-                            <tr class="miss">
-                                <td class="line">83</td>
-                                <td class="hits">0</td>
-                                <td class="source">          return renderJSON(request, null, request.user);</td>
+                                <td class="source">          return console.post(&quot;Request &quot;, request);</td>
                             </tr>
                         
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">84</td>
+                            <td class="line">73</td>
                             <td class="hits"></td>
                             <td class="source">        },</td>
                         </tr>
@@ -1252,31 +1158,31 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">85</td>
+                            <td class="line">74</td>
                             <td class="hits"></td>
-                            <td class="source">        description: &#x27;Get user&#x27;,</td>
+                            <td class="source">        description: &#x27;Post question&#x27;,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">86</td>
+                            <td class="line">75</td>
                             <td class="hits"></td>
-                            <td class="source">        notes: &#x27;Get user data&#x27;,</td>
+                            <td class="source">        notes: &#x27;Save question and answer &#x27;,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">87</td>
+                            <td class="line">76</td>
                             <td class="hits"></td>
-                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;user&#x27;]</td>
+                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;questions&#x27;]</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">88</td>
+                            <td class="line">77</td>
                             <td class="hits"></td>
                             <td class="source">      }</td>
                         </tr>
@@ -1284,7 +1190,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">89</td>
+                            <td class="line">78</td>
                             <td class="hits"></td>
                             <td class="source">    }, {</td>
                         </tr>
@@ -1292,7 +1198,7 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">90</td>
+                            <td class="line">79</td>
                             <td class="hits"></td>
                             <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
@@ -1300,15 +1206,15 @@
                 
                     
                         <tr class="hit">
-                            <td class="line">91</td>
+                            <td class="line">80</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/&#x27;,</td>
+                            <td class="source">      path: &#x27;/users/&#x27;,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
-                            <td class="line">92</td>
+                            <td class="line">81</td>
                             <td class="hits"></td>
                             <td class="source">      config: {</td>
                         </tr>
@@ -1316,9 +1222,97 @@
                 
                     
                         <tr class="hit">
+                            <td class="line">82</td>
+                            <td class="hits"></td>
+                            <td class="source">        auth: &#x27;passport&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">83</td>
+                            <td class="hits"></td>
+                            <td class="source">        handler: function(request) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">84</td>
+                            <td class="hits">1</td>
+                            <td class="source">          return request.reply(request.user);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">85</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">86</td>
+                            <td class="hits"></td>
+                            <td class="source">        description: &#x27;Get user&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">87</td>
+                            <td class="hits"></td>
+                            <td class="source">        notes: &#x27;Get user data&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">88</td>
+                            <td class="hits"></td>
+                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;user&#x27;]</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">89</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">90</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">91</td>
+                            <td class="hits"></td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">92</td>
+                            <td class="hits"></td>
+                            <td class="source">      path: &#x27;/&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
                             <td class="line">93</td>
                             <td class="hits"></td>
-                            <td class="source">        handler: apiHandler</td>
+                            <td class="source">      config: {</td>
                         </tr>
                     
                 
@@ -1326,7 +1320,7 @@
                         <tr class="hit">
                             <td class="line">94</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">        handler: apiHandler</td>
                         </tr>
                     
                 
@@ -1334,7 +1328,7 @@
                         <tr class="hit">
                             <td class="line">95</td>
                             <td class="hits"></td>
-                            <td class="source">    }, {</td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1342,7 +1336,7 @@
                         <tr class="hit">
                             <td class="line">96</td>
                             <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                            <td class="source">    }, {</td>
                         </tr>
                     
                 
@@ -1350,7 +1344,7 @@
                         <tr class="hit">
                             <td class="line">97</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/api/{path*}&#x27;,</td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
                     
                 
@@ -1358,7 +1352,7 @@
                         <tr class="hit">
                             <td class="line">98</td>
                             <td class="hits"></td>
-                            <td class="source">      handler: {</td>
+                            <td class="source">      path: &#x27;/api/{path*}&#x27;,</td>
                         </tr>
                     
                 
@@ -1366,7 +1360,7 @@
                         <tr class="hit">
                             <td class="line">99</td>
                             <td class="hits"></td>
-                            <td class="source">        directory: {</td>
+                            <td class="source">      handler: {</td>
                         </tr>
                     
                 
@@ -1374,7 +1368,7 @@
                         <tr class="hit">
                             <td class="line">100</td>
                             <td class="hits"></td>
-                            <td class="source">          path: &#x27;./public&#x27;,</td>
+                            <td class="source">        directory: {</td>
                         </tr>
                     
                 
@@ -1382,7 +1376,7 @@
                         <tr class="hit">
                             <td class="line">101</td>
                             <td class="hits"></td>
-                            <td class="source">          listing: false,</td>
+                            <td class="source">          path: &#x27;./public&#x27;,</td>
                         </tr>
                     
                 
@@ -1390,7 +1384,7 @@
                         <tr class="hit">
                             <td class="line">102</td>
                             <td class="hits"></td>
-                            <td class="source">          index: true</td>
+                            <td class="source">          listing: false,</td>
                         </tr>
                     
                 
@@ -1398,7 +1392,7 @@
                         <tr class="hit">
                             <td class="line">103</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">          index: true</td>
                         </tr>
                     
                 
@@ -1406,7 +1400,7 @@
                         <tr class="hit">
                             <td class="line">104</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -1414,7 +1408,7 @@
                         <tr class="hit">
                             <td class="line">105</td>
                             <td class="hits"></td>
-                            <td class="source">    }, {</td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1422,7 +1416,7 @@
                         <tr class="hit">
                             <td class="line">106</td>
                             <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                            <td class="source">    }, {</td>
                         </tr>
                     
                 
@@ -1430,7 +1424,7 @@
                         <tr class="hit">
                             <td class="line">107</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/test/{path*}&#x27;,</td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
                     
                 
@@ -1438,7 +1432,7 @@
                         <tr class="hit">
                             <td class="line">108</td>
                             <td class="hits"></td>
-                            <td class="source">      handler: {</td>
+                            <td class="source">      path: &#x27;/test/{path*}&#x27;,</td>
                         </tr>
                     
                 
@@ -1446,7 +1440,7 @@
                         <tr class="hit">
                             <td class="line">109</td>
                             <td class="hits"></td>
-                            <td class="source">        directory: {</td>
+                            <td class="source">      handler: {</td>
                         </tr>
                     
                 
@@ -1454,7 +1448,7 @@
                         <tr class="hit">
                             <td class="line">110</td>
                             <td class="hits"></td>
-                            <td class="source">          path: &#x27;./test&#x27;,</td>
+                            <td class="source">        directory: {</td>
                         </tr>
                     
                 
@@ -1462,7 +1456,7 @@
                         <tr class="hit">
                             <td class="line">111</td>
                             <td class="hits"></td>
-                            <td class="source">          listing: false,</td>
+                            <td class="source">          path: &#x27;./test&#x27;,</td>
                         </tr>
                     
                 
@@ -1470,7 +1464,7 @@
                         <tr class="hit">
                             <td class="line">112</td>
                             <td class="hits"></td>
-                            <td class="source">          index: true</td>
+                            <td class="source">          listing: false,</td>
                         </tr>
                     
                 
@@ -1478,7 +1472,7 @@
                         <tr class="hit">
                             <td class="line">113</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">          index: true</td>
                         </tr>
                     
                 
@@ -1486,7 +1480,7 @@
                         <tr class="hit">
                             <td class="line">114</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -1494,7 +1488,7 @@
                         <tr class="hit">
                             <td class="line">115</td>
                             <td class="hits"></td>
-                            <td class="source">    }</td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1502,7 +1496,7 @@
                         <tr class="hit">
                             <td class="line">116</td>
                             <td class="hits"></td>
-                            <td class="source">  ];</td>
+                            <td class="source">    }</td>
                         </tr>
                     
                 
@@ -1510,7 +1504,7 @@
                         <tr class="hit">
                             <td class="line">117</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">  ];</td>
                         </tr>
                     
                 
@@ -1518,13 +1512,21 @@
                         <tr class="hit">
                             <td class="line">118</td>
                             <td class="hits"></td>
-                            <td class="source">}).call(this);</td>
+                            <td class="source"></td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">119</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">120</td>
                             <td class="hits"></td>
                             <td class="source"></td>
                         </tr>
@@ -1675,7 +1677,7 @@
                     
                         <tr class="hit">
                             <td class="line">16</td>
-                            <td class="hits">7</td>
+                            <td class="hits">8</td>
                             <td class="source">    var pluginConfigs, serverInst, validConf;</td>
                         </tr>
                     
@@ -1683,7 +1685,7 @@
                     
                         <tr class="hit">
                             <td class="line">17</td>
-                            <td class="hits">7</td>
+                            <td class="hits">8</td>
                             <td class="source">    validConf = ((config != null ? config.host : void 0) != null) &amp;&amp; (config.port != null) &amp;&amp; (config.options != null) &amp;&amp; (config.plugins != null);</td>
                         </tr>
                     
@@ -1691,7 +1693,7 @@
                     
                         <tr class="hit">
                             <td class="line">18</td>
-                            <td class="hits">7</td>
+                            <td class="hits">8</td>
                             <td class="source">    Hapi.utils.assert(validConf, &quot;Server module: Invalid configuration object: &quot; + config);</td>
                         </tr>
                     
@@ -1699,7 +1701,7 @@
                     
                         <tr class="hit">
                             <td class="line">19</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    serverInst = new Hapi.Server(config.host, config.port, config.options);</td>
                         </tr>
                     
@@ -1707,7 +1709,7 @@
                     
                         <tr class="hit">
                             <td class="line">20</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    pluginConfigs = config.plugins;</td>
                         </tr>
                     
@@ -1715,7 +1717,7 @@
                     
                         <tr class="hit">
                             <td class="line">21</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    if (pluginConfigs[&#x27;travelogue-fork&#x27;]) {</td>
                         </tr>
                     
@@ -1723,7 +1725,7 @@
                     
                         <tr class="hit">
                             <td class="line">22</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">      pluginConfigs[&#x27;travelogue-fork&#x27;] = config;</td>
                         </tr>
                     
@@ -1739,7 +1741,7 @@
                     
                         <tr class="hit">
                             <td class="line">24</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    serverInst.pack.allow({</td>
                         </tr>
                     
@@ -1763,7 +1765,7 @@
                     
                         <tr class="hit">
                             <td class="line">27</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">      return Hapi.utils.assert(!err, &quot;Server module: &quot; + err);</td>
                         </tr>
                     
@@ -1779,7 +1781,7 @@
                     
                         <tr class="hit">
                             <td class="line">29</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    return serverInst;</td>
                         </tr>
                     
@@ -1823,10 +1825,10 @@
             <div class="file">
                 <h2 id="lib/utilities.js">lib/utilities.js</h2>
                 <div class="stats high">
-                    <div class="percentage">92.86%</div>
+                    <div class="percentage">100.00%</div>
                     <div class="sloc">14</div>
-                    <div class="hits">13</div>
-                    <div class="misses">1</div>
+                    <div class="hits">14</div>
+                    <div class="misses">0</div>
                 </div>
                 <table>
                     <thead>
@@ -2143,13 +2145,11 @@
                     
                 
                     
-                        
-                            <tr class="miss">
-                                <td class="line">39</td>
-                                <td class="hits">0</td>
-                                <td class="source">              return code;</td>
-                            </tr>
-                        
+                        <tr class="hit">
+                            <td class="line">39</td>
+                            <td class="hits">2</td>
+                            <td class="source">              return code;</td>
+                        </tr>
                     
                 
                     
@@ -3956,7 +3956,7 @@
                         <tr class="hit">
                             <td class="line">59</td>
                             <td class="hits"></td>
-                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                            <td class="source">      poop: {</td>
                         </tr>
                     
                 
@@ -3964,7 +3964,7 @@
                         <tr class="hit">
                             <td class="line">60</td>
                             <td class="hits"></td>
-                            <td class="source">    }</td>
+                            <td class="source">        logPath: &#x27;./exception.log&#x27;</td>
                         </tr>
                     
                 
@@ -3972,7 +3972,7 @@
                         <tr class="hit">
                             <td class="line">61</td>
                             <td class="hits"></td>
-                            <td class="source">  };</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -3980,7 +3980,7 @@
                         <tr class="hit">
                             <td class="line">62</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
                         </tr>
                     
                 
@@ -3988,7 +3988,7 @@
                         <tr class="hit">
                             <td class="line">63</td>
                             <td class="hits"></td>
-                            <td class="source">  /*</td>
+                            <td class="source">    }</td>
                         </tr>
                     
                 
@@ -3996,7 +3996,7 @@
                         <tr class="hit">
                             <td class="line">64</td>
                             <td class="hits"></td>
-                            <td class="source">  * Server production configuration</td>
+                            <td class="source">  };</td>
                         </tr>
                     
                 
@@ -4004,7 +4004,7 @@
                         <tr class="hit">
                             <td class="line">65</td>
                             <td class="hits"></td>
-                            <td class="source">  * @name production</td>
+                            <td class="source"></td>
                         </tr>
                     
                 
@@ -4012,7 +4012,7 @@
                         <tr class="hit">
                             <td class="line">66</td>
                             <td class="hits"></td>
-                            <td class="source">  * @api public</td>
+                            <td class="source">  /*</td>
                         </tr>
                     
                 
@@ -4020,7 +4020,7 @@
                         <tr class="hit">
                             <td class="line">67</td>
                             <td class="hits"></td>
-                            <td class="source">  */</td>
+                            <td class="source">  * Server production configuration</td>
                         </tr>
                     
                 
@@ -4028,7 +4028,7 @@
                         <tr class="hit">
                             <td class="line">68</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">  * @name production</td>
                         </tr>
                     
                 
@@ -4036,15 +4036,15 @@
                         <tr class="hit">
                             <td class="line">69</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">  * @api public</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">70</td>
-                            <td class="hits">1</td>
-                            <td class="source">  conf[envType.PRODUCTION] = {</td>
+                            <td class="hits"></td>
+                            <td class="source">  */</td>
                         </tr>
                     
                 
@@ -4052,7 +4052,7 @@
                         <tr class="hit">
                             <td class="line">71</td>
                             <td class="hits"></td>
-                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
+                            <td class="source"></td>
                         </tr>
                     
                 
@@ -4060,15 +4060,15 @@
                         <tr class="hit">
                             <td class="line">72</td>
                             <td class="hits"></td>
-                            <td class="source">    host: &#x27;127.0.0.1&#x27;,</td>
+                            <td class="source"></td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">73</td>
-                            <td class="hits"></td>
-                            <td class="source">    port: 3000,</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.PRODUCTION] = {</td>
                         </tr>
                     
                 
@@ -4076,7 +4076,7 @@
                         <tr class="hit">
                             <td class="line">74</td>
                             <td class="hits"></td>
-                            <td class="source">    url: &#x27;http://127.0.0.1:3000/&#x27;,</td>
+                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
                         </tr>
                     
                 
@@ -4084,7 +4084,7 @@
                         <tr class="hit">
                             <td class="line">75</td>
                             <td class="hits"></td>
-                            <td class="source">    options: {</td>
+                            <td class="source">    host: &#x27;127.0.0.1&#x27;,</td>
                         </tr>
                     
                 
@@ -4092,7 +4092,7 @@
                         <tr class="hit">
                             <td class="line">76</td>
                             <td class="hits"></td>
-                            <td class="source">      state: {</td>
+                            <td class="source">    port: 3000,</td>
                         </tr>
                     
                 
@@ -4100,7 +4100,7 @@
                         <tr class="hit">
                             <td class="line">77</td>
                             <td class="hits"></td>
-                            <td class="source">        cookies: {</td>
+                            <td class="source">    url: &#x27;http://127.0.0.1:3000/&#x27;,</td>
                         </tr>
                     
                 
@@ -4108,7 +4108,7 @@
                         <tr class="hit">
                             <td class="line">78</td>
                             <td class="hits"></td>
-                            <td class="source">          clearInvalid: true</td>
+                            <td class="source">    options: {</td>
                         </tr>
                     
                 
@@ -4116,7 +4116,7 @@
                         <tr class="hit">
                             <td class="line">79</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">      state: {</td>
                         </tr>
                     
                 
@@ -4124,7 +4124,7 @@
                         <tr class="hit">
                             <td class="line">80</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">        cookies: {</td>
                         </tr>
                     
                 
@@ -4132,7 +4132,7 @@
                         <tr class="hit">
                             <td class="line">81</td>
                             <td class="hits"></td>
-                            <td class="source">      timeout: {</td>
+                            <td class="source">          clearInvalid: true</td>
                         </tr>
                     
                 
@@ -4140,7 +4140,7 @@
                         <tr class="hit">
                             <td class="line">82</td>
                             <td class="hits"></td>
-                            <td class="source">        server: 50000</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -4156,7 +4156,7 @@
                         <tr class="hit">
                             <td class="line">84</td>
                             <td class="hits"></td>
-                            <td class="source">      labels: [&#x27;api&#x27;],</td>
+                            <td class="source">      timeout: {</td>
                         </tr>
                     
                 
@@ -4164,7 +4164,7 @@
                         <tr class="hit">
                             <td class="line">85</td>
                             <td class="hits"></td>
-                            <td class="source">      views: {</td>
+                            <td class="source">        server: 50000</td>
                         </tr>
                     
                 
@@ -4172,7 +4172,7 @@
                         <tr class="hit">
                             <td class="line">86</td>
                             <td class="hits"></td>
-                            <td class="source">        path: &#x27;templates&#x27;,</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4180,7 +4180,7 @@
                         <tr class="hit">
                             <td class="line">87</td>
                             <td class="hits"></td>
-                            <td class="source">        engines: {</td>
+                            <td class="source">      labels: [&#x27;api&#x27;],</td>
                         </tr>
                     
                 
@@ -4188,7 +4188,7 @@
                         <tr class="hit">
                             <td class="line">88</td>
                             <td class="hits"></td>
-                            <td class="source">          html: &#x27;handlebars&#x27;</td>
+                            <td class="source">      views: {</td>
                         </tr>
                     
                 
@@ -4196,7 +4196,7 @@
                         <tr class="hit">
                             <td class="line">89</td>
                             <td class="hits"></td>
-                            <td class="source">        },</td>
+                            <td class="source">        path: &#x27;templates&#x27;,</td>
                         </tr>
                     
                 
@@ -4204,7 +4204,7 @@
                         <tr class="hit">
                             <td class="line">90</td>
                             <td class="hits"></td>
-                            <td class="source">        partialsPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
+                            <td class="source">        engines: {</td>
                         </tr>
                     
                 
@@ -4212,7 +4212,7 @@
                         <tr class="hit">
                             <td class="line">91</td>
                             <td class="hits"></td>
-                            <td class="source">        helpersPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
+                            <td class="source">          html: &#x27;handlebars&#x27;</td>
                         </tr>
                     
                 
@@ -4220,7 +4220,7 @@
                         <tr class="hit">
                             <td class="line">92</td>
                             <td class="hits"></td>
-                            <td class="source">        isCached: false</td>
+                            <td class="source">        },</td>
                         </tr>
                     
                 
@@ -4228,7 +4228,7 @@
                         <tr class="hit">
                             <td class="line">93</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">        partialsPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
                         </tr>
                     
                 
@@ -4236,7 +4236,7 @@
                         <tr class="hit">
                             <td class="line">94</td>
                             <td class="hits"></td>
-                            <td class="source">      cors: true</td>
+                            <td class="source">        helpersPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
                         </tr>
                     
                 
@@ -4244,7 +4244,7 @@
                         <tr class="hit">
                             <td class="line">95</td>
                             <td class="hits"></td>
-                            <td class="source">    },</td>
+                            <td class="source">        isCached: false</td>
                         </tr>
                     
                 
@@ -4252,7 +4252,7 @@
                         <tr class="hit">
                             <td class="line">96</td>
                             <td class="hits"></td>
-                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4260,7 +4260,7 @@
                         <tr class="hit">
                             <td class="line">97</td>
                             <td class="hits"></td>
-                            <td class="source">    plugins: {</td>
+                            <td class="source">      cors: true</td>
                         </tr>
                     
                 
@@ -4268,7 +4268,7 @@
                         <tr class="hit">
                             <td class="line">98</td>
                             <td class="hits"></td>
-                            <td class="source">      yar: {</td>
+                            <td class="source">    },</td>
                         </tr>
                     
                 
@@ -4276,7 +4276,7 @@
                         <tr class="hit">
                             <td class="line">99</td>
                             <td class="hits"></td>
-                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
+                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
                         </tr>
                     
                 
@@ -4284,7 +4284,7 @@
                         <tr class="hit">
                             <td class="line">100</td>
                             <td class="hits"></td>
-                            <td class="source">        cookieOptions: {</td>
+                            <td class="source">    plugins: {</td>
                         </tr>
                     
                 
@@ -4292,7 +4292,7 @@
                         <tr class="hit">
                             <td class="line">101</td>
                             <td class="hits"></td>
-                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
+                            <td class="source">      yar: {</td>
                         </tr>
                     
                 
@@ -4300,7 +4300,7 @@
                         <tr class="hit">
                             <td class="line">102</td>
                             <td class="hits"></td>
-                            <td class="source">          isSecure: false</td>
+                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
                         </tr>
                     
                 
@@ -4308,7 +4308,7 @@
                         <tr class="hit">
                             <td class="line">103</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">        cookieOptions: {</td>
                         </tr>
                     
                 
@@ -4316,7 +4316,7 @@
                         <tr class="hit">
                             <td class="line">104</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
                         </tr>
                     
                 
@@ -4324,7 +4324,7 @@
                         <tr class="hit">
                             <td class="line">105</td>
                             <td class="hits"></td>
-                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                            <td class="source">          isSecure: false</td>
                         </tr>
                     
                 
@@ -4332,7 +4332,7 @@
                         <tr class="hit">
                             <td class="line">106</td>
                             <td class="hits"></td>
-                            <td class="source">    }</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -4340,7 +4340,7 @@
                         <tr class="hit">
                             <td class="line">107</td>
                             <td class="hits"></td>
-                            <td class="source">  };</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4348,7 +4348,7 @@
                         <tr class="hit">
                             <td class="line">108</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">      poop: {</td>
                         </tr>
                     
                 
@@ -4356,7 +4356,7 @@
                         <tr class="hit">
                             <td class="line">109</td>
                             <td class="hits"></td>
-                            <td class="source">  /*</td>
+                            <td class="source">        logPath: &#x27;./exception.log&#x27;</td>
                         </tr>
                     
                 
@@ -4364,7 +4364,7 @@
                         <tr class="hit">
                             <td class="line">110</td>
                             <td class="hits"></td>
-                            <td class="source">  * Server test configuration</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4372,7 +4372,7 @@
                         <tr class="hit">
                             <td class="line">111</td>
                             <td class="hits"></td>
-                            <td class="source">  * @name test</td>
+                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
                         </tr>
                     
                 
@@ -4380,7 +4380,7 @@
                         <tr class="hit">
                             <td class="line">112</td>
                             <td class="hits"></td>
-                            <td class="source">  * @api public</td>
+                            <td class="source">    }</td>
                         </tr>
                     
                 
@@ -4388,7 +4388,7 @@
                         <tr class="hit">
                             <td class="line">113</td>
                             <td class="hits"></td>
-                            <td class="source">  */</td>
+                            <td class="source">  };</td>
                         </tr>
                     
                 
@@ -4404,15 +4404,15 @@
                         <tr class="hit">
                             <td class="line">115</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">  /*</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">116</td>
-                            <td class="hits">1</td>
-                            <td class="source">  conf[envType.TEST] = {</td>
+                            <td class="hits"></td>
+                            <td class="source">  * Server test configuration</td>
                         </tr>
                     
                 
@@ -4420,7 +4420,7 @@
                         <tr class="hit">
                             <td class="line">117</td>
                             <td class="hits"></td>
-                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
+                            <td class="source">  * @name test</td>
                         </tr>
                     
                 
@@ -4428,7 +4428,7 @@
                         <tr class="hit">
                             <td class="line">118</td>
                             <td class="hits"></td>
-                            <td class="source">    host: &#x27;127.0.0.1&#x27;,</td>
+                            <td class="source">  * @api public</td>
                         </tr>
                     
                 
@@ -4436,7 +4436,7 @@
                         <tr class="hit">
                             <td class="line">119</td>
                             <td class="hits"></td>
-                            <td class="source">    port: 3333,</td>
+                            <td class="source">  */</td>
                         </tr>
                     
                 
@@ -4444,7 +4444,7 @@
                         <tr class="hit">
                             <td class="line">120</td>
                             <td class="hits"></td>
-                            <td class="source">    url: &#x27;http://127.0.0.1:3333/&#x27;,</td>
+                            <td class="source"></td>
                         </tr>
                     
                 
@@ -4452,15 +4452,15 @@
                         <tr class="hit">
                             <td class="line">121</td>
                             <td class="hits"></td>
-                            <td class="source">    options: {</td>
+                            <td class="source"></td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">122</td>
-                            <td class="hits"></td>
-                            <td class="source">      state: {</td>
+                            <td class="hits">1</td>
+                            <td class="source">  conf[envType.TEST] = {</td>
                         </tr>
                     
                 
@@ -4468,7 +4468,7 @@
                         <tr class="hit">
                             <td class="line">123</td>
                             <td class="hits"></td>
-                            <td class="source">        cookies: {</td>
+                            <td class="source">    protocoll: &#x27;http&#x27;,</td>
                         </tr>
                     
                 
@@ -4476,7 +4476,7 @@
                         <tr class="hit">
                             <td class="line">124</td>
                             <td class="hits"></td>
-                            <td class="source">          clearInvalid: true</td>
+                            <td class="source">    host: &#x27;127.0.0.1&#x27;,</td>
                         </tr>
                     
                 
@@ -4484,7 +4484,7 @@
                         <tr class="hit">
                             <td class="line">125</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">    port: 3333,</td>
                         </tr>
                     
                 
@@ -4492,7 +4492,7 @@
                         <tr class="hit">
                             <td class="line">126</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">    url: &#x27;http://127.0.0.1:3333/&#x27;,</td>
                         </tr>
                     
                 
@@ -4500,7 +4500,7 @@
                         <tr class="hit">
                             <td class="line">127</td>
                             <td class="hits"></td>
-                            <td class="source">      timeout: {</td>
+                            <td class="source">    options: {</td>
                         </tr>
                     
                 
@@ -4508,7 +4508,7 @@
                         <tr class="hit">
                             <td class="line">128</td>
                             <td class="hits"></td>
-                            <td class="source">        server: 50000</td>
+                            <td class="source">      state: {</td>
                         </tr>
                     
                 
@@ -4516,7 +4516,7 @@
                         <tr class="hit">
                             <td class="line">129</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">        cookies: {</td>
                         </tr>
                     
                 
@@ -4524,7 +4524,7 @@
                         <tr class="hit">
                             <td class="line">130</td>
                             <td class="hits"></td>
-                            <td class="source">      labels: [&#x27;api&#x27;],</td>
+                            <td class="source">          clearInvalid: true</td>
                         </tr>
                     
                 
@@ -4532,7 +4532,7 @@
                         <tr class="hit">
                             <td class="line">131</td>
                             <td class="hits"></td>
-                            <td class="source">      views: {</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -4540,7 +4540,7 @@
                         <tr class="hit">
                             <td class="line">132</td>
                             <td class="hits"></td>
-                            <td class="source">        path: &#x27;templates&#x27;,</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4548,7 +4548,7 @@
                         <tr class="hit">
                             <td class="line">133</td>
                             <td class="hits"></td>
-                            <td class="source">        engines: {</td>
+                            <td class="source">      timeout: {</td>
                         </tr>
                     
                 
@@ -4556,7 +4556,7 @@
                         <tr class="hit">
                             <td class="line">134</td>
                             <td class="hits"></td>
-                            <td class="source">          html: &#x27;handlebars&#x27;</td>
+                            <td class="source">        server: 50000</td>
                         </tr>
                     
                 
@@ -4564,7 +4564,7 @@
                         <tr class="hit">
                             <td class="line">135</td>
                             <td class="hits"></td>
-                            <td class="source">        },</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4572,7 +4572,7 @@
                         <tr class="hit">
                             <td class="line">136</td>
                             <td class="hits"></td>
-                            <td class="source">        partialsPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
+                            <td class="source">      labels: [&#x27;api&#x27;],</td>
                         </tr>
                     
                 
@@ -4580,7 +4580,7 @@
                         <tr class="hit">
                             <td class="line">137</td>
                             <td class="hits"></td>
-                            <td class="source">        helpersPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
+                            <td class="source">      views: {</td>
                         </tr>
                     
                 
@@ -4588,7 +4588,7 @@
                         <tr class="hit">
                             <td class="line">138</td>
                             <td class="hits"></td>
-                            <td class="source">        isCached: false</td>
+                            <td class="source">        path: &#x27;templates&#x27;,</td>
                         </tr>
                     
                 
@@ -4596,7 +4596,7 @@
                         <tr class="hit">
                             <td class="line">139</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">        engines: {</td>
                         </tr>
                     
                 
@@ -4604,7 +4604,7 @@
                         <tr class="hit">
                             <td class="line">140</td>
                             <td class="hits"></td>
-                            <td class="source">      cors: true</td>
+                            <td class="source">          html: &#x27;handlebars&#x27;</td>
                         </tr>
                     
                 
@@ -4612,7 +4612,7 @@
                         <tr class="hit">
                             <td class="line">141</td>
                             <td class="hits"></td>
-                            <td class="source">    },</td>
+                            <td class="source">        },</td>
                         </tr>
                     
                 
@@ -4620,7 +4620,7 @@
                         <tr class="hit">
                             <td class="line">142</td>
                             <td class="hits"></td>
-                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
+                            <td class="source">        partialsPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/withPartials&#x27;,</td>
                         </tr>
                     
                 
@@ -4628,7 +4628,7 @@
                         <tr class="hit">
                             <td class="line">143</td>
                             <td class="hits"></td>
-                            <td class="source">    plugins: {</td>
+                            <td class="source">        helpersPath: __dirname.replace(&#x27;/lib/config&#x27;, &#x27;&#x27;) + &#x27;/templates/helpers&#x27;,</td>
                         </tr>
                     
                 
@@ -4636,7 +4636,7 @@
                         <tr class="hit">
                             <td class="line">144</td>
                             <td class="hits"></td>
-                            <td class="source">      yar: {</td>
+                            <td class="source">        isCached: false</td>
                         </tr>
                     
                 
@@ -4644,7 +4644,7 @@
                         <tr class="hit">
                             <td class="line">145</td>
                             <td class="hits"></td>
-                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4652,7 +4652,7 @@
                         <tr class="hit">
                             <td class="line">146</td>
                             <td class="hits"></td>
-                            <td class="source">        cookieOptions: {</td>
+                            <td class="source">      cors: true</td>
                         </tr>
                     
                 
@@ -4660,7 +4660,7 @@
                         <tr class="hit">
                             <td class="line">147</td>
                             <td class="hits"></td>
-                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
+                            <td class="source">    },</td>
                         </tr>
                     
                 
@@ -4668,7 +4668,7 @@
                         <tr class="hit">
                             <td class="line">148</td>
                             <td class="hits"></td>
-                            <td class="source">          isSecure: false</td>
+                            <td class="source">    excludePaths: [&#x27;/docs/&#x27;],</td>
                         </tr>
                     
                 
@@ -4676,7 +4676,7 @@
                         <tr class="hit">
                             <td class="line">149</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">    plugins: {</td>
                         </tr>
                     
                 
@@ -4684,7 +4684,7 @@
                         <tr class="hit">
                             <td class="line">150</td>
                             <td class="hits"></td>
-                            <td class="source">      },</td>
+                            <td class="source">      yar: {</td>
                         </tr>
                     
                 
@@ -4692,7 +4692,7 @@
                         <tr class="hit">
                             <td class="line">151</td>
                             <td class="hits"></td>
-                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                            <td class="source">        ttl: 2 * 24 * 60 * 60 * 1000,</td>
                         </tr>
                     
                 
@@ -4700,7 +4700,7 @@
                         <tr class="hit">
                             <td class="line">152</td>
                             <td class="hits"></td>
-                            <td class="source">    }</td>
+                            <td class="source">        cookieOptions: {</td>
                         </tr>
                     
                 
@@ -4708,7 +4708,7 @@
                         <tr class="hit">
                             <td class="line">153</td>
                             <td class="hits"></td>
-                            <td class="source">  };</td>
+                            <td class="source">          password: &#x27;mindsecretflow&#x27;,</td>
                         </tr>
                     
                 
@@ -4716,15 +4716,15 @@
                         <tr class="hit">
                             <td class="line">154</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">          isSecure: false</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">155</td>
-                            <td class="hits">1</td>
-                            <td class="source">  module.exports = conf;</td>
+                            <td class="hits"></td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -4732,7 +4732,7 @@
                         <tr class="hit">
                             <td class="line">156</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">      },</td>
                         </tr>
                     
                 
@@ -4740,13 +4740,85 @@
                         <tr class="hit">
                             <td class="line">157</td>
                             <td class="hits"></td>
-                            <td class="source">}).call(this);</td>
+                            <td class="source">      poop: {</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">158</td>
+                            <td class="hits"></td>
+                            <td class="source">        logPath: &#x27;./exception.log&#x27;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">159</td>
+                            <td class="hits"></td>
+                            <td class="source">      },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">160</td>
+                            <td class="hits"></td>
+                            <td class="source">      &#x27;travelogue-fork&#x27;: true</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">161</td>
+                            <td class="hits"></td>
+                            <td class="source">    }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">162</td>
+                            <td class="hits"></td>
+                            <td class="source">  };</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">163</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">164</td>
+                            <td class="hits">1</td>
+                            <td class="source">  module.exports = conf;</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">165</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">166</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">167</td>
                             <td class="hits"></td>
                             <td class="source"></td>
                         </tr>

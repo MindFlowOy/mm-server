@@ -53,6 +53,9 @@ conf[envType.DEVELOPMET] =
                 password: 'mindsecretflow'
                 isSecure: false
 
+        poop:
+            logPath: './exception.log'
+
         'travelogue-fork': true
 
 ###
@@ -97,6 +100,9 @@ conf[envType.PRODUCTION] =
             cookieOptions:
                 password: 'mindsecretflow'
                 isSecure: false
+
+        poop:
+            logPath: './exception.log'
 
         'travelogue-fork': true
 
@@ -143,6 +149,9 @@ conf[envType.TEST] =
             cookieOptions:
                 password: 'mindsecretflow'
                 isSecure: false
+
+        poop:
+            logPath: './exception.log'
 
         'travelogue-fork': true
 

@@ -38,7 +38,6 @@ module.exports =
             callback err, data
 
 
-
     ###
     *  env variable that defaults to 'development'
     * @type {String}

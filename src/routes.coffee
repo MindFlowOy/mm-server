@@ -23,32 +23,16 @@ apiHandler = (request) ->
             title: pack.name
             markdown: data
 
-# Helper to render json out to http stream
-renderJSON = (request, error, result ) ->
-    if error
-        request.reply new Hapi.error(500, error)
-    else
-        request.reply(result).type 'application/json; charset=utf-8'
 
 module.exports = [
 
-    # Example of route requiring authentication
-    method: 'GET'
-    path: '/home'
-    config:
-        auth: 'passport'
-        handler: (request) ->
-            request.reply 'ACCESS GRANTED<br/><br/>'
-
-
-,
     # Questions
     method: "GET"
     path: "/questions/"
     config:
         auth: false
         handler: (request) ->
-            renderJSON request, null,
+            request.reply
                 questions: [
                     Q: "Did you eat food?"
                     Y: 1
@@ -68,14 +52,31 @@ module.exports = [
         tags: ['api', 'questions']
 
 ,
-    # User
+    method: "POST"
+    path: "/questions/"
+    config:
+        auth: true
+        validate:
+            query: {}
+            payload:
+                username: Hapi.types.String().required().description 'username'
+                password: Hapi.types.String().required().description 'password'
+        handler: (request) ->
+            console.post "Request ", request
+
+        description: 'Post question'
+        notes: 'Save question and answer '
+        tags: ['api', 'questions']
+
+,
+    # User route requiring authentication
     method: 'GET'
     path: '/users/'
     config:
         auth: 'passport'
         handler: (request) ->
-            console.log 'Route: /users/ #{request.user}'
-            renderJSON request, null, request.user
+            request.reply request.user
+            #request.reply(request.user ).type 'application/json; charset=utf-8'
 
         description: 'Get user'
         notes: 'Get user data'

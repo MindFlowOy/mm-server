@@ -54,6 +54,8 @@ run-prod: compile
 #------- Clean -------
 clean:
 	@rm -f ./lib/*.*
+	@rm -f ./test/lib/*.*
+	@rm -f ./test/test.log
 
 .PHONY: clean
 

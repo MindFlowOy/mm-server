@@ -20,13 +20,14 @@
     },
     "devDependencies": {
         "hapi": "1.x.x",
-        "lab": "1.x.x"
+        "lab": "1.x.x",
+        "shot": "*"
     },
     "license": "MIT",
     "dependencies": {
         "coffee-script": "~1.6.3",
-        "lodash": "*",
         "hapi": "~1.2.0",
+        "poop": "~0.0.4",
         "mf-auth-api": "~0.0.1",
         "travelogue-fork":"*",
         "request":"*",
