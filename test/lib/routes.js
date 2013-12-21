@@ -41,7 +41,7 @@
 
   userRequest = {
     method: "GET",
-    url: '/users/',
+    url: '/users/me',
     headers: {}
   };
 
@@ -57,14 +57,14 @@
     headers: {}
   };
 
-  describe('/users/', function() {
+  describe('/users/me', function() {
     it('GET returns an error when requested without auth', function(done) {
       var authModuleError, hapiServer;
       hapiServer = server(configs.server);
       authModuleError = authentication(hapiServer, configs.authentication);
       expect(authModuleError).to.equal(void 0);
       hapiServer.addRoutes(routes);
-      return hapiServer.inject('/users/', function(res) {
+      return hapiServer.inject('/users/me', function(res) {
         expect(res.statusCode).to.equal(401);
         expect(res.result.err).to.equal('unauthenticated');
         return done();
@@ -116,7 +116,6 @@
         questionRequest.headers.cookie = cookie;
         expect(res.statusCode).to.equal(200);
         return hapiServer.inject(questionRequest, function(res) {
-          console.log(res);
           expect(res.result.question).to.equal(1);
           return done();
         });

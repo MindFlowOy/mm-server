@@ -63,7 +63,6 @@ module.exports = [
                 answer: Hapi.types.String().required().description 'answer to question'
 
         handler: (request) ->
-            console.log "Request ", request
             request.reply {question: 1}
 
         description: 'Post question'
@@ -73,7 +72,7 @@ module.exports = [
 ,
     # User route requiring authentication
     method: 'GET'
-    path: '/users/'
+    path: '/users/me'
     config:
         auth: 'passport'
         handler: (request) ->

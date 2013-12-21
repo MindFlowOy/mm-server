@@ -25,7 +25,7 @@ aaRequest =
 
 userRequest =
     method: "GET"
-    url: '/users/'
+    url: '/users/me'
     headers: {}
 
 questionBody =
@@ -38,14 +38,14 @@ questionRequest =
     payload: JSON.stringify(questionBody)
     headers: {}
 
-describe '/users/', ->
+describe '/users/me', ->
     it 'GET returns an error when requested without auth', (done) ->
         hapiServer = server(configs.server)
         authModuleError = authentication(hapiServer, configs.authentication)
         expect(authModuleError).to.equal undefined
         hapiServer.addRoutes routes
 
-        hapiServer.inject '/users/', (res) ->
+        hapiServer.inject '/users/me', (res) ->
             expect(res.statusCode).to.equal 401
             expect(res.result.err).to.equal 'unauthenticated'
             done()
