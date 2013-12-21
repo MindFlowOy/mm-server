@@ -28,7 +28,7 @@ module.exports = [
 
     # Questions
     method: "GET"
-    path: "/questions/"
+    path: "/questions/food"
     config:
         auth: false
         handler: (request) ->
@@ -53,16 +53,18 @@ module.exports = [
 
 ,
     method: "POST"
-    path: "/questions/"
+    path: "/questions/food"
     config:
         auth: true
         validate:
             query: {}
             payload:
-                username: Hapi.types.String().required().description 'username'
-                password: Hapi.types.String().required().description 'password'
+                question: Hapi.types.String().required().description 'question'
+                answer: Hapi.types.String().required().description 'answer to question'
+
         handler: (request) ->
-            console.post "Request ", request
+            console.log "Request ", request
+            request.reply {question: 1}
 
         description: 'Post question'
         notes: 'Save question and answer '

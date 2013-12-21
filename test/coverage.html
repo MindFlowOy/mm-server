@@ -250,7 +250,7 @@
             </li>
             
             <li>
-                <span class="cov high">92.86</span>
+                <span class="cov high">100.00</span>
                 <a href="#lib/routes.js"><span class="dirname">lib/</span><span class="basename">routes.js</span></a>
             </li>
             
@@ -291,10 +291,10 @@
             
         </div>
         <div class="stats high">
-            <div class="percentage">94.51%</div>
-            <div class="sloc">91</div>
-            <div class="hits">86</div>
-            <div class="misses">5</div>
+            <div class="percentage">95.65%</div>
+            <div class="sloc">92</div>
+            <div class="hits">88</div>
+            <div class="misses">4</div>
         </div>
         <div id="files">
             
@@ -439,7 +439,7 @@
                     
                         <tr class="hit">
                             <td class="line">16</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    var _ref, _ref1;</td>
                         </tr>
                     
@@ -447,7 +447,7 @@
                     
                         <tr class="hit">
                             <td class="line">17</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    Hapi.utils.assert((hapiServer != null ? (_ref = hapiServer.plugins) != null ? (_ref1 = _ref[&#x27;travelogue-fork&#x27;]) != null ? _ref1.passport : void 0 : void 0 : void 0) != null, &#x27;Athentication module: Passport plugin not found&#x27;);</td>
                         </tr>
                     
@@ -455,7 +455,7 @@
                     
                         <tr class="hit">
                             <td class="line">18</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    Hapi.utils.assert(config != null, &quot;Athentication module: Invalid configuration object &quot; + config);</td>
                         </tr>
                     
@@ -463,7 +463,7 @@
                     
                         <tr class="hit">
                             <td class="line">19</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    config.passport = hapiServer.plugins[&#x27;travelogue-fork&#x27;].passport;</td>
                         </tr>
                     
@@ -471,7 +471,7 @@
                     
                         <tr class="hit">
                             <td class="line">20</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">    return hapiServer.pack.allow({</td>
                         </tr>
                     
@@ -495,7 +495,7 @@
                     
                         <tr class="hit">
                             <td class="line">23</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">      Hapi.utils.assert(!err, &quot;Athentication module: &quot; + err);</td>
                         </tr>
                     
@@ -503,7 +503,7 @@
                     
                         <tr class="hit">
                             <td class="line">24</td>
-                            <td class="hits">4</td>
+                            <td class="hits">5</td>
                             <td class="source">      return hapiServer.log([&#x27;init&#x27;], &#x27;Athentication module: mf-auth-api plugin loaded&#x27;);</td>
                         </tr>
                     
@@ -555,10 +555,10 @@
             <div class="file">
                 <h2 id="lib/routes.js">lib/routes.js</h2>
                 <div class="stats high">
-                    <div class="percentage">92.86%</div>
-                    <div class="sloc">14</div>
-                    <div class="hits">13</div>
-                    <div class="misses">1</div>
+                    <div class="percentage">100.00%</div>
+                    <div class="sloc">15</div>
+                    <div class="hits">15</div>
+                    <div class="misses">0</div>
                 </div>
                 <table>
                     <thead>
@@ -830,7 +830,7 @@
                         <tr class="hit">
                             <td class="line">33</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &quot;/questions/&quot;,</td>
+                            <td class="source">      path: &quot;/questions/food&quot;,</td>
                         </tr>
                     
                 
@@ -1054,7 +1054,7 @@
                         <tr class="hit">
                             <td class="line">61</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &quot;/questions/&quot;,</td>
+                            <td class="source">      path: &quot;/questions/food&quot;,</td>
                         </tr>
                     
                 
@@ -1102,7 +1102,7 @@
                         <tr class="hit">
                             <td class="line">67</td>
                             <td class="hits"></td>
-                            <td class="source">            username: Hapi.types.String().required().description(&#x27;username&#x27;),</td>
+                            <td class="source">            question: Hapi.types.String().required().description(&#x27;question&#x27;),</td>
                         </tr>
                     
                 
@@ -1110,7 +1110,7 @@
                         <tr class="hit">
                             <td class="line">68</td>
                             <td class="hits"></td>
-                            <td class="source">            password: Hapi.types.String().required().description(&#x27;password&#x27;)</td>
+                            <td class="source">            answer: Hapi.types.String().required().description(&#x27;answer to question&#x27;)</td>
                         </tr>
                     
                 
@@ -1139,20 +1139,18 @@
                     
                 
                     
-                        
-                            <tr class="miss">
-                                <td class="line">72</td>
-                                <td class="hits">0</td>
-                                <td class="source">          return console.post(&quot;Request &quot;, request);</td>
-                            </tr>
-                        
+                        <tr class="hit">
+                            <td class="line">72</td>
+                            <td class="hits">1</td>
+                            <td class="source">          console.log(&quot;Request &quot;, request);</td>
+                        </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">73</td>
-                            <td class="hits"></td>
-                            <td class="source">        },</td>
+                            <td class="hits">1</td>
+                            <td class="source">          return request.reply({</td>
                         </tr>
                     
                 
@@ -1160,7 +1158,7 @@
                         <tr class="hit">
                             <td class="line">74</td>
                             <td class="hits"></td>
-                            <td class="source">        description: &#x27;Post question&#x27;,</td>
+                            <td class="source">            question: 1</td>
                         </tr>
                     
                 
@@ -1168,7 +1166,7 @@
                         <tr class="hit">
                             <td class="line">75</td>
                             <td class="hits"></td>
-                            <td class="source">        notes: &#x27;Save question and answer &#x27;,</td>
+                            <td class="source">          });</td>
                         </tr>
                     
                 
@@ -1176,7 +1174,7 @@
                         <tr class="hit">
                             <td class="line">76</td>
                             <td class="hits"></td>
-                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;questions&#x27;]</td>
+                            <td class="source">        },</td>
                         </tr>
                     
                 
@@ -1184,7 +1182,7 @@
                         <tr class="hit">
                             <td class="line">77</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">        description: &#x27;Post question&#x27;,</td>
                         </tr>
                     
                 
@@ -1192,7 +1190,7 @@
                         <tr class="hit">
                             <td class="line">78</td>
                             <td class="hits"></td>
-                            <td class="source">    }, {</td>
+                            <td class="source">        notes: &#x27;Save question and answer &#x27;,</td>
                         </tr>
                     
                 
@@ -1200,7 +1198,7 @@
                         <tr class="hit">
                             <td class="line">79</td>
                             <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;questions&#x27;]</td>
                         </tr>
                     
                 
@@ -1208,7 +1206,7 @@
                         <tr class="hit">
                             <td class="line">80</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/users/&#x27;,</td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1216,7 +1214,7 @@
                         <tr class="hit">
                             <td class="line">81</td>
                             <td class="hits"></td>
-                            <td class="source">      config: {</td>
+                            <td class="source">    }, {</td>
                         </tr>
                     
                 
@@ -1224,7 +1222,7 @@
                         <tr class="hit">
                             <td class="line">82</td>
                             <td class="hits"></td>
-                            <td class="source">        auth: &#x27;passport&#x27;,</td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
                     
                 
@@ -1232,85 +1230,13 @@
                         <tr class="hit">
                             <td class="line">83</td>
                             <td class="hits"></td>
-                            <td class="source">        handler: function(request) {</td>
+                            <td class="source">      path: &#x27;/users/&#x27;,</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">84</td>
-                            <td class="hits">1</td>
-                            <td class="source">          return request.reply(request.user);</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">85</td>
-                            <td class="hits"></td>
-                            <td class="source">        },</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">86</td>
-                            <td class="hits"></td>
-                            <td class="source">        description: &#x27;Get user&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">87</td>
-                            <td class="hits"></td>
-                            <td class="source">        notes: &#x27;Get user data&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">88</td>
-                            <td class="hits"></td>
-                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;user&#x27;]</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">89</td>
-                            <td class="hits"></td>
-                            <td class="source">      }</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">90</td>
-                            <td class="hits"></td>
-                            <td class="source">    }, {</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">91</td>
-                            <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">92</td>
-                            <td class="hits"></td>
-                            <td class="source">      path: &#x27;/&#x27;,</td>
-                        </tr>
-                    
-                
-                    
-                        <tr class="hit">
-                            <td class="line">93</td>
                             <td class="hits"></td>
                             <td class="source">      config: {</td>
                         </tr>
@@ -1318,9 +1244,81 @@
                 
                     
                         <tr class="hit">
+                            <td class="line">85</td>
+                            <td class="hits"></td>
+                            <td class="source">        auth: &#x27;passport&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">86</td>
+                            <td class="hits"></td>
+                            <td class="source">        handler: function(request) {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">87</td>
+                            <td class="hits">1</td>
+                            <td class="source">          return request.reply(request.user);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">88</td>
+                            <td class="hits"></td>
+                            <td class="source">        },</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">89</td>
+                            <td class="hits"></td>
+                            <td class="source">        description: &#x27;Get user&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">90</td>
+                            <td class="hits"></td>
+                            <td class="source">        notes: &#x27;Get user data&#x27;,</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">91</td>
+                            <td class="hits"></td>
+                            <td class="source">        tags: [&#x27;api&#x27;, &#x27;user&#x27;]</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">92</td>
+                            <td class="hits"></td>
+                            <td class="source">      }</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">93</td>
+                            <td class="hits"></td>
+                            <td class="source">    }, {</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
                             <td class="line">94</td>
                             <td class="hits"></td>
-                            <td class="source">        handler: apiHandler</td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
                     
                 
@@ -1328,7 +1326,7 @@
                         <tr class="hit">
                             <td class="line">95</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">      path: &#x27;/&#x27;,</td>
                         </tr>
                     
                 
@@ -1336,7 +1334,7 @@
                         <tr class="hit">
                             <td class="line">96</td>
                             <td class="hits"></td>
-                            <td class="source">    }, {</td>
+                            <td class="source">      config: {</td>
                         </tr>
                     
                 
@@ -1344,7 +1342,7 @@
                         <tr class="hit">
                             <td class="line">97</td>
                             <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                            <td class="source">        handler: apiHandler</td>
                         </tr>
                     
                 
@@ -1352,7 +1350,7 @@
                         <tr class="hit">
                             <td class="line">98</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/api/{path*}&#x27;,</td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1360,7 +1358,7 @@
                         <tr class="hit">
                             <td class="line">99</td>
                             <td class="hits"></td>
-                            <td class="source">      handler: {</td>
+                            <td class="source">    }, {</td>
                         </tr>
                     
                 
@@ -1368,7 +1366,7 @@
                         <tr class="hit">
                             <td class="line">100</td>
                             <td class="hits"></td>
-                            <td class="source">        directory: {</td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
                     
                 
@@ -1376,7 +1374,7 @@
                         <tr class="hit">
                             <td class="line">101</td>
                             <td class="hits"></td>
-                            <td class="source">          path: &#x27;./public&#x27;,</td>
+                            <td class="source">      path: &#x27;/api/{path*}&#x27;,</td>
                         </tr>
                     
                 
@@ -1384,7 +1382,7 @@
                         <tr class="hit">
                             <td class="line">102</td>
                             <td class="hits"></td>
-                            <td class="source">          listing: false,</td>
+                            <td class="source">      handler: {</td>
                         </tr>
                     
                 
@@ -1392,7 +1390,7 @@
                         <tr class="hit">
                             <td class="line">103</td>
                             <td class="hits"></td>
-                            <td class="source">          index: true</td>
+                            <td class="source">        directory: {</td>
                         </tr>
                     
                 
@@ -1400,7 +1398,7 @@
                         <tr class="hit">
                             <td class="line">104</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">          path: &#x27;./public&#x27;,</td>
                         </tr>
                     
                 
@@ -1408,7 +1406,7 @@
                         <tr class="hit">
                             <td class="line">105</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">          listing: false,</td>
                         </tr>
                     
                 
@@ -1416,7 +1414,7 @@
                         <tr class="hit">
                             <td class="line">106</td>
                             <td class="hits"></td>
-                            <td class="source">    }, {</td>
+                            <td class="source">          index: true</td>
                         </tr>
                     
                 
@@ -1424,7 +1422,7 @@
                         <tr class="hit">
                             <td class="line">107</td>
                             <td class="hits"></td>
-                            <td class="source">      method: &#x27;GET&#x27;,</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -1432,7 +1430,7 @@
                         <tr class="hit">
                             <td class="line">108</td>
                             <td class="hits"></td>
-                            <td class="source">      path: &#x27;/test/{path*}&#x27;,</td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1440,7 +1438,7 @@
                         <tr class="hit">
                             <td class="line">109</td>
                             <td class="hits"></td>
-                            <td class="source">      handler: {</td>
+                            <td class="source">    }, {</td>
                         </tr>
                     
                 
@@ -1448,7 +1446,7 @@
                         <tr class="hit">
                             <td class="line">110</td>
                             <td class="hits"></td>
-                            <td class="source">        directory: {</td>
+                            <td class="source">      method: &#x27;GET&#x27;,</td>
                         </tr>
                     
                 
@@ -1456,7 +1454,7 @@
                         <tr class="hit">
                             <td class="line">111</td>
                             <td class="hits"></td>
-                            <td class="source">          path: &#x27;./test&#x27;,</td>
+                            <td class="source">      path: &#x27;/test/{path*}&#x27;,</td>
                         </tr>
                     
                 
@@ -1464,7 +1462,7 @@
                         <tr class="hit">
                             <td class="line">112</td>
                             <td class="hits"></td>
-                            <td class="source">          listing: false,</td>
+                            <td class="source">      handler: {</td>
                         </tr>
                     
                 
@@ -1472,7 +1470,7 @@
                         <tr class="hit">
                             <td class="line">113</td>
                             <td class="hits"></td>
-                            <td class="source">          index: true</td>
+                            <td class="source">        directory: {</td>
                         </tr>
                     
                 
@@ -1480,7 +1478,7 @@
                         <tr class="hit">
                             <td class="line">114</td>
                             <td class="hits"></td>
-                            <td class="source">        }</td>
+                            <td class="source">          path: &#x27;./test&#x27;,</td>
                         </tr>
                     
                 
@@ -1488,7 +1486,7 @@
                         <tr class="hit">
                             <td class="line">115</td>
                             <td class="hits"></td>
-                            <td class="source">      }</td>
+                            <td class="source">          listing: false,</td>
                         </tr>
                     
                 
@@ -1496,7 +1494,7 @@
                         <tr class="hit">
                             <td class="line">116</td>
                             <td class="hits"></td>
-                            <td class="source">    }</td>
+                            <td class="source">          index: true</td>
                         </tr>
                     
                 
@@ -1504,7 +1502,7 @@
                         <tr class="hit">
                             <td class="line">117</td>
                             <td class="hits"></td>
-                            <td class="source">  ];</td>
+                            <td class="source">        }</td>
                         </tr>
                     
                 
@@ -1512,7 +1510,7 @@
                         <tr class="hit">
                             <td class="line">118</td>
                             <td class="hits"></td>
-                            <td class="source"></td>
+                            <td class="source">      }</td>
                         </tr>
                     
                 
@@ -1520,13 +1518,37 @@
                         <tr class="hit">
                             <td class="line">119</td>
                             <td class="hits"></td>
-                            <td class="source">}).call(this);</td>
+                            <td class="source">    }</td>
                         </tr>
                     
                 
                     
                         <tr class="hit">
                             <td class="line">120</td>
+                            <td class="hits"></td>
+                            <td class="source">  ];</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">121</td>
+                            <td class="hits"></td>
+                            <td class="source"></td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">122</td>
+                            <td class="hits"></td>
+                            <td class="source">}).call(this);</td>
+                        </tr>
+                    
+                
+                    
+                        <tr class="hit">
+                            <td class="line">123</td>
                             <td class="hits"></td>
                             <td class="source"></td>
                         </tr>
@@ -1677,7 +1699,7 @@
                     
                         <tr class="hit">
                             <td class="line">16</td>
-                            <td class="hits">8</td>
+                            <td class="hits">9</td>
                             <td class="source">    var pluginConfigs, serverInst, validConf;</td>
                         </tr>
                     
@@ -1685,7 +1707,7 @@
                     
                         <tr class="hit">
                             <td class="line">17</td>
-                            <td class="hits">8</td>
+                            <td class="hits">9</td>
                             <td class="source">    validConf = ((config != null ? config.host : void 0) != null) &amp;&amp; (config.port != null) &amp;&amp; (config.options != null) &amp;&amp; (config.plugins != null);</td>
                         </tr>
                     
@@ -1693,7 +1715,7 @@
                     
                         <tr class="hit">
                             <td class="line">18</td>
-                            <td class="hits">8</td>
+                            <td class="hits">9</td>
                             <td class="source">    Hapi.utils.assert(validConf, &quot;Server module: Invalid configuration object: &quot; + config);</td>
                         </tr>
                     
@@ -1701,7 +1723,7 @@
                     
                         <tr class="hit">
                             <td class="line">19</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">    serverInst = new Hapi.Server(config.host, config.port, config.options);</td>
                         </tr>
                     
@@ -1709,7 +1731,7 @@
                     
                         <tr class="hit">
                             <td class="line">20</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">    pluginConfigs = config.plugins;</td>
                         </tr>
                     
@@ -1717,7 +1739,7 @@
                     
                         <tr class="hit">
                             <td class="line">21</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">    if (pluginConfigs[&#x27;travelogue-fork&#x27;]) {</td>
                         </tr>
                     
@@ -1725,7 +1747,7 @@
                     
                         <tr class="hit">
                             <td class="line">22</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">      pluginConfigs[&#x27;travelogue-fork&#x27;] = config;</td>
                         </tr>
                     
@@ -1741,7 +1763,7 @@
                     
                         <tr class="hit">
                             <td class="line">24</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">    serverInst.pack.allow({</td>
                         </tr>
                     
@@ -1765,7 +1787,7 @@
                     
                         <tr class="hit">
                             <td class="line">27</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">      return Hapi.utils.assert(!err, &quot;Server module: &quot; + err);</td>
                         </tr>
                     
@@ -1781,7 +1803,7 @@
                     
                         <tr class="hit">
                             <td class="line">29</td>
-                            <td class="hits">5</td>
+                            <td class="hits">6</td>
                             <td class="source">    return serverInst;</td>
                         </tr>
                     
