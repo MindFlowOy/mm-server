@@ -7,8 +7,8 @@
 
         In "server" dir
             npm link mf-auth-api
-            npm link travelogue-fork
-
+            and later when not needed anymore:
+            npm unlink mf-auth-api
 
 **Base node installation:**
 
