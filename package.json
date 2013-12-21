@@ -19,7 +19,6 @@
     "peerDependencies": {
     },
     "devDependencies": {
-        "hapi": "1.x.x",
         "lab": "1.x.x",
         "shot": "*"
     },

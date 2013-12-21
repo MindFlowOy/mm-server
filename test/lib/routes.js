@@ -59,10 +59,9 @@
 
   describe('/users/me', function() {
     it('GET returns an error when requested without auth', function(done) {
-      var authModuleError, hapiServer;
+      var hapiServer;
       hapiServer = server(configs.server);
-      authModuleError = authentication(hapiServer, configs.authentication);
-      expect(authModuleError).to.equal(void 0);
+      authentication(hapiServer, configs.authentication);
       hapiServer.addRoutes(routes);
       return hapiServer.inject('/users/me', function(res) {
         expect(res.statusCode).to.equal(401);
@@ -104,9 +103,9 @@
       });
     });
     return it('POST saves questions reply', function(done) {
-      var authModuleError, hapiServer;
+      var hapiServer;
       hapiServer = server(configs.server);
-      authModuleError = authentication(hapiServer, configs.authentication);
+      authentication(hapiServer, configs.authentication);
       hapiServer.addRoutes(routes);
       return hapiServer.inject(aaRequest, function(res) {
         var cookie, header;
@@ -125,9 +124,9 @@
 
   describe('/ (root)', function() {
     return it('GET returns API documentation', function(done) {
-      var authModuleError, hapiServer;
+      var hapiServer;
       hapiServer = server(configs.server);
-      authModuleError = authentication(hapiServer, configs.authentication);
+      authentication(hapiServer, configs.authentication);
       hapiServer.addRoutes(routes);
       return hapiServer.inject('/', function(res) {
         expect(res.statusCode).to.equal(200);

@@ -40,9 +40,8 @@ questionRequest =
 
 describe '/users/me', ->
     it 'GET returns an error when requested without auth', (done) ->
-        hapiServer = server(configs.server)
-        authModuleError = authentication(hapiServer, configs.authentication)
-        expect(authModuleError).to.equal undefined
+        hapiServer = server configs.server
+        authentication hapiServer, configs.authentication
         hapiServer.addRoutes routes
 
         hapiServer.inject '/users/me', (res) ->
@@ -52,8 +51,8 @@ describe '/users/me', ->
 
     it 'GET returns user when requested with auth', (done) ->
 
-        hapiServer = server(configs.server)
-        authentication(hapiServer, configs.authentication)
+        hapiServer = server configs.server
+        authentication hapiServer, configs.authentication
         hapiServer.addRoutes routes
 
         hapiServer.inject aaRequest, (res) ->
@@ -69,8 +68,8 @@ describe '/users/me', ->
 describe '/questions/food', ->
     it 'GET returns questions object', (done) ->
 
-        hapiServer = server(configs.server)
-        authentication(hapiServer, configs.authentication)
+        hapiServer = server configs.server
+        authentication hapiServer, configs.authentication
         hapiServer.addRoutes routes
 
 
@@ -82,8 +81,8 @@ describe '/questions/food', ->
 
      it 'POST saves questions reply', (done) ->
 
-        hapiServer = server(configs.server)
-        authModuleError = authentication(hapiServer, configs.authentication)
+        hapiServer = server configs.server
+        authentication hapiServer, configs.authentication
         hapiServer.addRoutes routes
 
         hapiServer.inject aaRequest, (res) ->
@@ -99,8 +98,8 @@ describe '/questions/food', ->
 describe '/ (root)', ->
     it 'GET returns API documentation', (done) ->
 
-        hapiServer = server(configs.server)
-        authModuleError = authentication(hapiServer, configs.authentication)
+        hapiServer = server configs.server
+        authentication hapiServer, configs.authentication
         hapiServer.addRoutes routes
 
         hapiServer.inject '/', (res) ->

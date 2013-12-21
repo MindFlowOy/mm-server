@@ -20,10 +20,11 @@ if (process.env.NODETIME_ACCOUNT_KEY) {
 }
 
 */
-if (process.env.NODE_ENV === 'production') {
-    console.log('Starting /lib/index.js')
-    require('./lib/index.js')
-} else {
+if (process.env.NODE_ENV === 'development') {
     console.log("Starting /src/index.coffee");
     require('coffee-script'), require('./src/index.coffee');
+} else {
+    console.log('Starting /lib/index.js')
+    require('./lib/index.js')
 }
+

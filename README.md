@@ -5,7 +5,7 @@
         In "auth"-directory
             npm link
 
-        In "server" dir
+        In "mm" dir
             npm link mf-auth-api
             and later when not needed anymore:
             npm unlink mf-auth-api
